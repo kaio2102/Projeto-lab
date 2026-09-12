@@ -1,0 +1,83 @@
+.cards-grid {
+    display: grid;
+    /* auto-fit + max fixo impede o esticamento; justify-content centraliza */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    box-shadow: 0 2px 8px rgba(26,58,92,0.06), 0 8px 24px rgba(26,58,92,0.06);
+    transition: box-shadow .25s, transform .25s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Detalhe decorativo lateral — azul (padrão) */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #2d6a9f, #a8d4f5);
+    border-radius: 18px 0 0 18px;
+}
+
+/* Decorativo laranja — Pedidos em Produção */
+.stat-card--producao::before {
+    background: linear-gradient(180deg, #d97706, #fcd29a);
+}
+
+/* Decorativo verde — Pedidos Concluídos */
+.stat-card--concluido::before {
+    background: linear-gradient(180deg, #1e7e4a, #7dd4a8);
+}
+
+.stat-card:hover {
+    box-shadow: 0 8px 28px rgba(26,58,92,0.13);
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    font-size: 1.6rem;
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #e8f1f9 0%, #d0e6f5 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(45,106,159,0.12);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.stat-label {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -.02em;
+}

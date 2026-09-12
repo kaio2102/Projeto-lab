@@ -1,0 +1,50 @@
+<!-- Sidebar estática — carregada via fetch() em sidebar.js (substituiu th:fragment do Thymeleaf) -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">🦷</div>
+        <span class="sidebar-brand-text">Facilita Lab</span>
+    </div>
+
+    <span class="nav-section">Menu</span>
+    <nav>
+        <!-- GESTOR -->
+        <a href="/dashboard" class="nav-item" data-perfil="GESTOR">
+            <span class="nav-icon">⊞</span> Dashboard
+        </a>
+        <a href="/lista-usuarios" class="nav-item" data-perfil="GESTOR">
+            <span class="nav-icon">☰</span> Usuários
+        </a>
+        <a href="/lista-pedidos" class="nav-item" data-perfil="GESTOR">
+            <span class="nav-icon">⊙</span> Todos os Pedidos
+        </a>
+
+        <!-- DENTISTA -->
+        <a href="/dashboard-dentista" class="nav-item" data-perfil="DENTISTA">
+            <span class="nav-icon">⊞</span> Meu Dashboard
+        </a>
+        <a href="/meus-pedidos" class="nav-item" data-perfil="DENTISTA">
+            <span class="nav-icon">⊙</span> Meus Pedidos
+        </a>
+        <a href="/cadastro-pedido" class="nav-item" data-perfil="DENTISTA">
+            <span class="nav-icon">+</span> Novo Pedido
+        </a>
+
+        <!-- RECEPCAO -->
+        <a href="/dashboard-recepcao" class="nav-item" data-perfil="RECEPCAO">
+            <span class="nav-icon">⊞</span> Dashboard
+        </a>
+        <a href="/lista-pedidos-recepcao" class="nav-item" data-perfil="RECEPCAO">
+            <span class="nav-icon">⊙</span> Pedidos
+        </a>
+        <a href="/triagem-pedido" class="nav-item" data-perfil="RECEPCAO">
+            <span class="nav-icon">✎</span> Triagem
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <span>Facilita Lab © 2026</span>
+        <button class="btn-logout" onclick="logout()">
+            <span class="nav-icon">⏻</span> Sair
+        </button>
+    </div>
+</aside>

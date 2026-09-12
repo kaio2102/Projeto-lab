@@ -1,0 +1,247 @@
+/* ==========================================================================
+   cadastro-pedido.css
+   Estilos específicos da tela de cadastro de pedido.
+   Estilos base (variáveis, sidebar, layout, .btn-primary, #mensagem) vêm
+   de layout.css — aqui só entra o que é exclusivo desta página.
+   ========================================================================== */
+
+/* ── Layout em duas colunas ──────────────────────────────────────────────
+   Divide a área útil em formulário (esquerda) e painel auxiliar (direita).
+   Em telas menores empilha verticalmente.                                 */
+.cadastro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .cadastro-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Card do formulário ──────────────────────────────────────────────────
+   Reutiliza variáveis do design system (--card-bg, --border, --shadow-card). */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* ── Campos do formulário ────────────────────────────────────────────────
+   Cada .field agrupa label + input/select + mensagem de erro.            */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+/* Label padrão de campo */
+label {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+/* Inputs, selects e textareas seguem o mesmo visual */
+input,
+select,
+textarea {
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .72rem 1rem;
+    font-size: .95rem;
+    font-family: inherit;
+    color: var(--text);
+    transition: border-color .2s, box-shadow .2s, background .2s;
+    outline: none;
+    width: 100%;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #b0bec8;
+}
+
+/* Estado de foco — destaca o campo ativo com a cor de acento */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent);
+    background: var(--card-bg);
+    box-shadow: 0 0 0 4px rgba(45,106,159,0.12);
+}
+
+/* Select customizado com seta SVG */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7f94' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 2.5rem;
+}
+
+/* Textarea com resize apenas vertical */
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* ── Validação inline ────────────────────────────────────────────────────
+   Mensagem de erro exibida abaixo de cada campo.                         */
+.field-error {
+    font-size: .78rem;
+    color: var(--danger);
+    font-weight: 500;
+    display: none;
+}
+
+/* Borda vermelha no campo com erro */
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+    border-color: var(--danger);
+}
+
+/* Torna a mensagem visível quando o campo tem erro */
+.field.has-error .field-error {
+    display: block;
+}
+
+/* ── Upload STL (PoC visual) ─────────────────────────────────────────────
+   Zona de drag-and-drop estilizada, apenas visual por enquanto.          */
+.upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    background: var(--input-bg);
+}
+
+.upload-zone:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+}
+
+.upload-zone__icon {
+    font-size: 2.5rem;
+    margin-bottom: .6rem;
+}
+
+.upload-zone__text {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: .25rem;
+}
+
+.upload-zone__sub {
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+/* Estado quando um arquivo foi "selecionado" */
+.upload-zone.has-file {
+    border-color: var(--success);
+    background: var(--success-bg);
+}
+
+/* ── Checklist estático ──────────────────────────────────────────────────
+   Lista de verificações visuais antes do envio.                          */
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+}
+
+.checklist label {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    font-size: .88rem;
+    font-weight: 500;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: normal;
+    cursor: pointer;
+}
+
+.checklist input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+}
+
+/* ── Coluna auxiliar (direita) ────────────────────────────────────────────
+   Empilha upload + checklist + botão de envio.                           */
+.side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ── Título de seção dentro do card ──────────────────────────────────────
+   Ex.: "📎 Arquivo STL", "🔍 Checklist"                                 */
+.card__title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: .75rem;
+}
+
+/* ── Toast de sucesso ────────────────────────────────────────────────────
+   Notificação fixa no canto inferior direito.                            */
+.toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.toast {
+    background: var(--success);
+    color: #fff;
+    padding: .85rem 1.4rem;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    animation: toastIn .3s ease, toastOut .3s ease 2.7s forwards;
+}
+
+.toast--error {
+    background: var(--danger);
+}
+
+@keyframes toastIn  { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes toastOut { from { opacity: 1; }                              to { opacity: 0; } }
+
+/* ── Ajuste do cabeçalho ─────────────────────────────────────────────────
+   Reduz espaço inferior para aproximar do formulário.                    */
+.page-header {
+    margin-bottom: .65rem;
+}
+
+/* ── Botão de envio (full width) ─────────────────────────────────────────
+   Herda .btn-primary de layout.css — aqui só garante largura total.      */
+button.btn-primary {
+    width: 100%;
+    padding: .85rem;
+}

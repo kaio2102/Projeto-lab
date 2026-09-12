@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – Recepção | Facilita Lab</title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/lista.css" />
+    <link rel="stylesheet" href="/css/dashboard-dentista.css" />
+    <link rel="stylesheet" href="/css/dashboard-recepcao.css" />
+</head>
+
+<body>
+    <div class="app">
+        <div id="sidebar-container"></div>
+
+        <main class="content">
+            <div class="page-header">
+                <div class="page-header-row">
+                    <div>
+                        <h1>Dashboard da Recepção</h1>
+                        <span class="page-sub">Visão geral e gestão de todos os pedidos</span>
+                    </div>
+                    <div class="header-actions">
+                        <span class="polling-badge" id="pollingBadge">
+                            <span class="polling-dot"></span> Ao vivo
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards de estatísticas -->
+            <div class="cards-grid">
+                <div class="stat-card stat-card--triagem">
+                    <div class="stat-icon">📥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Aguardando Triagem</span>
+                        <span class="stat-value" id="statTriagem">—</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-card--urgente">
+                    <div class="stat-icon">🚨</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Urgentes</span>
+                        <span class="stat-value" id="statUrgentes">—</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-card--producao">
+                    <div class="stat-icon">🔬</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Em Produção</span>
+                        <span class="stat-value" id="statProducao">—</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-card--concluido">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Finalizados</span>
+                        <span class="stat-value" id="statFinalizado">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alertas -->
+            <div id="alertas" class="alertas-container"></div>
+
+            <!-- Seção: Urgentes primeiro -->
+            <div class="section-header">
+                <h2 class="section-title">⚠️ Pedidos Urgentes</h2>
+                <a href="/lista-pedidos-recepcao" class="link-ver-todos">Ver todos os pedidos →</a>
+            </div>
+
+            <div class="table-card" id="tabelaUrgentesCard">
+                <table id="tabelaUrgentes">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Dentista</th>
+                            <th>Material</th>
+                            <th>Estado</th>
+                            <th>Prazo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoUrgentes"></tbody>
+                </table>
+                <p id="vazioUrgentes" style="display:none" class="vazio-msg">Nenhum pedido urgente no momento. 🎉</p>
+                <div id="carregandoUrgentes" class="carregando-msg">Carregando...</div>
+            </div>
+
+            <!-- Seção: Aguardando triagem -->
+            <div class="section-header" style="margin-top:2rem">
+                <h2 class="section-title">📥 Aguardando Triagem</h2>
+            </div>
+
+            <div class="table-card">
+                <table id="tabelaTriagem">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Dentista</th>
+                            <th>Material</th>
+                            <th>Prioridade</th>
+                            <th>Prazo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTriagem"></tbody>
+                </table>
+                <p id="vazioTriagem" style="display:none" class="vazio-msg">Nenhum pedido aguardando triagem.</p>
+                <div id="carregandoTriagem" class="carregando-msg">Carregando...</div>
+            </div>
+
+            <p class="ultima-atualizacao">Atualização automática a cada 30s · Última: <span id="ultimaAtualizacao">—</span></p>
+        </main>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/dashboard-recepcao.js"></script>
+</body>
+</html>

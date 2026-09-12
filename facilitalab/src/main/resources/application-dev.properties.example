@@ -1,0 +1,19 @@
+# Copie este arquivo para application-dev.properties e preencha os valores reais
+# Este arquivo entra no Git NÃO coloque dados reais aqui
+
+# ── Banco de dados ──────────────────────────────────────────
+spring.datasource.url=jdbc:mysql://localhost:3306/facilitalab_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=America/Sao_Paulo&allowPublicKeyRetrieval=true
+spring.datasource.username=SEU_USUARIO_MYSQL
+spring.datasource.password=SUA_SENHA_MYSQL
+
+# ── E-mail ───────────────────────────────────────────────────
+spring.mail.username=SEU_EMAIL@gmail.com
+spring.mail.password=SUA_APP_PASSWORD_GMAIL
+
+# ── JWT ──────────────────────────────────────────────────────
+jwt.secret=MINIMO_32_CARACTERES_AQUI
+jwt.expiration=28800000
+
+# ── Dev: SQL visível no console ──────────────────────────────
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true

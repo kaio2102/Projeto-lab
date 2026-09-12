@@ -1,0 +1,165 @@
+/* ── CSS específico do Dashboard e Lista do Dentista ─────────────────────
+   Complementa layout.css e dashboard.css sem duplicar variáveis.         */
+
+/* ── Cabeçalho com ações ─────────────────────────────────────────────────*/
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ── Badge "Ao vivo" ─────────────────────────────────────────────────────*/
+.polling-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--success);
+    background: var(--success-bg);
+    border: 1.5px solid var(--success-border);
+    padding: .3rem .85rem;
+    border-radius: 99px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.polling-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulsar 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulsar {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: .45; transform: scale(.75); }
+}
+
+/* ── Stat card — pendente (amarelo) ──────────────────────────────────────*/
+.stat-card--pendente::before {
+    background: linear-gradient(180deg, #b45309, #fcd29a);
+}
+
+/* ── Seção "Pedidos Recentes" ────────────────────────────────────────────*/
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0 1rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.link-ver-todos {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    padding: .3rem .75rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--accent-border);
+    background: var(--accent-bg);
+    transition: background .2s, color .2s;
+}
+
+.link-ver-todos:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ── Badges de estado e prioridade ───────────────────────────────────────*/
+.badge {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: .28rem .75rem;
+    border-radius: 99px;
+    white-space: nowrap;
+}
+
+/* Prioridade */
+.badge--urgente {
+    background: #fff1f0;
+    color: #c0392b;
+    border: 1.5px solid #f5c6c6;
+}
+.badge--normal {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1.5px solid var(--accent-border);
+}
+
+/* Estados */
+.badge--triagem   { background: #fff8e1; color: #b45309; border: 1.5px solid #fcd29a; }
+.badge--info      { background: #fff3e0; color: #a0521b; border: 1.5px solid #f7c89a; }
+.badge--aprovacao { background: #e8f1fd; color: #2c5fa8; border: 1.5px solid #b8d0f8; }
+.badge--analise   { background: #f3e8ff; color: #7c3aed; border: 1.5px solid #d8b4fe; }
+.badge--modelagem { background: #e0f2fe; color: #0369a1; border: 1.5px solid #bae6fd; }
+.badge--correcao  { background: #fff0f6; color: #be185d; border: 1.5px solid #fbcfe8; }
+.badge--usinagem  { background: #f0fdf4; color: #166534; border: 1.5px solid #bbf7d0; }
+.badge--finalizado{ background: var(--success-bg); color: var(--success); border: 1.5px solid var(--success-border); }
+.badge--cancelado { background: #f9f9f9; color: #6b7280; border: 1.5px solid #e5e7eb; }
+
+/* ── Rodapé de atualização ───────────────────────────────────────────────*/
+.ultima-atualizacao {
+    font-size: .78rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 1rem;
+}
+
+/* ── Mensagem de carregamento ────────────────────────────────────────────*/
+.carregando-msg {
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+    font-size: .93rem;
+}
+
+/* ── Barra de ordenação ──────────────────────────────────────────────────*/
+.ordenacao-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.ordenacao-label {
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.select-ordem {
+    font-size: .85rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: .38rem .75rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color .2s;
+}
+
+.select-ordem:focus,
+.select-ordem:hover {
+    border-color: var(--accent);
+}
+
+.contador-pedidos {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-left: auto;
+}

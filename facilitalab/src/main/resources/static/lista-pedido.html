@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedidos – Facilita Lab</title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/lista.css" />
+</head>
+
+<body>
+    <div class="app">
+        <!-- Substituiu: <aside th:replace="~{fragments/sidebar :: sidebar(${activePage})}"></aside> -->
+        <div id="sidebar-container"></div>
+
+        <main class="content">
+            <div class="page-header">
+                <div class="page-header-row">
+                    <div>
+                        <h1>Pedidos Cadastrados</h1>
+                        <span class="page-sub">Lista de todos os pedidos do laboratório</span>
+                    </div>
+                    <a href="/cadastro-pedido" class="btn-primary btn-novo">+ Cadastrar novo pedido</a>
+                </div>
+            </div>
+
+            <div class="filtros">
+                <button class="filtro-btn active" data-estado="">Todos</button>
+                <button class="filtro-btn" data-estado="AGUARDANDO_TRIAGEM">Aguardando Triagem</button>
+                <button class="filtro-btn" data-estado="EM_ANALISE">Em Análise</button>
+                <button class="filtro-btn" data-estado="EM_MODELAGEM">Em Modelagem</button>
+                <button class="filtro-btn" data-estado="FINALIZADO">Finalizado</button>
+                <button class="filtro-btn" data-estado="CANCELADO">Cancelado</button>
+            </div>
+
+            <div class="table-card">
+                <table id="tabela">
+                    <thead>
+                    <tr>
+                        <th>Tipo de Prótese</th>
+                        <th>Cor</th>
+                        <th>Material</th>
+                        <th>Dentista</th>
+                        <th>Prioridade</th>
+                        <th>Estado</th>
+                        <th>Prazo de Entrega</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpo"></tbody>
+                </table>
+                <p id="vazio" style="display:none">Nenhum pedido encontrado.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- sidebar.js carrega o HTML da sidebar e define o item ativo via pathname -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/lista-pedido.js"></script>
+</body>
+
+</html>

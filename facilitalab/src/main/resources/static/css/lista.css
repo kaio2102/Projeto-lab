@@ -1,0 +1,173 @@
+/* Estilos base (variáveis, sidebar, layout, .btn-primary) vêm de layout.css */
+
+/* ── Tabela ──────────────────────────────────────────────────────────────── */
+
+.table-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: var(--input-bg);
+    border-bottom: 1.5px solid var(--border);
+}
+
+th {
+    text-align: left;
+    padding: .85rem 1.5rem;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+}
+
+td {
+    padding: .9rem 1.5rem;
+    color: var(--text);
+    font-size: .93rem;
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr { transition: background .15s; }
+tbody tr:hover { background: #f0f6ff; }
+
+/* Badge de perfil */
+td:last-child span {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: .25rem .7rem;
+    border-radius: 99px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+}
+
+#vazio {
+    text-align: center;
+    color: var(--muted);
+    padding: 2.5rem;
+    font-size: .95rem;
+}
+
+/* ── Botões de ação da tabela ────────────────────────────────────────────── */
+
+.acoes {
+    display: flex;
+    gap: .5rem;
+}
+
+.btn-editar,
+.btn-deletar {
+    width: auto;
+    padding: .4rem .9rem;
+    font-size: .8rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: .02em;
+    transition: background .2s, transform .1s, box-shadow .2s;
+    border: 1.5px solid;
+    box-shadow: none;
+}
+
+.btn-editar {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-color: var(--accent-border);
+}
+
+.btn-editar:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 10px rgba(45,106,159,0.25);
+}
+
+.btn-deletar {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: var(--danger-border);
+}
+
+.btn-deletar:hover {
+    background: var(--danger);
+    color: #fff;
+    border-color: var(--danger);
+    box-shadow: 0 4px 10px rgba(192,57,43,0.25);
+}
+
+.btn-editar:active,
+.btn-deletar:active { transform: scale(.97); }
+
+.btn-editar:disabled,
+.btn-deletar:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; }
+
+/* ── Filtros de perfil ───────────────────────────────────────────────────── */
+
+.filtros {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.filtro-btn {
+    width: auto;
+    padding: .45rem 1.1rem;
+    font-size: .82rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: 1.5px solid var(--border);
+    border-radius: 99px;
+    background: var(--card-bg);
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: .03em;
+    transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+    box-shadow: none;
+}
+
+.filtro-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #f0f6ff;
+}
+
+.filtro-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 10px rgba(45,106,159,0.25);
+}
+
+.filtro-btn:active { transform: scale(.97); }
+
+/* ── Cabeçalho com botão de cadastro ─────────────────────────────────────── */
+
+.page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Sobrescreve só tamanho e espaçamento; restante vem de .btn-primary */
+.btn-novo {
+    white-space: nowrap;
+    padding: .6rem 1.2rem;
+    font-size: .88rem;
+}

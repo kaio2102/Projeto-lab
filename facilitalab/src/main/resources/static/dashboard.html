@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – Facilita Lab</title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+    <div class="app">
+        <!-- Substituiu: <aside th:replace="~{fragments/sidebar :: sidebar(${activePage})}"></aside> -->
+        <div id="sidebar-container"></div>
+
+        <main class="content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <span class="page-sub">Visão geral do sistema</span>
+            </div>
+
+            <div class="cards-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👤</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Usuários Cadastrados</span>
+                        <span class="stat-value" id="totalUsuarios">—</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Lista de todos pedidos</span>
+                        <span class="stat-value" id="totalPedidos">—</span>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-card--producao">
+                    <div class="stat-icon">🔬</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Pedidos em produção</span>
+                        <span class="stat-value" id="pedidosProducao">—</span>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-card--concluido">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Pedidos concluídos</span>
+                        <span class="stat-value" id="pedidosConcluidos">—</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- sidebar.js carrega o HTML da sidebar e define o item ativo via pathname -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

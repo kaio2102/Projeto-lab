@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos – Recepção | Facilita Lab</title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/lista.css" />
+    <link rel="stylesheet" href="/css/dashboard-dentista.css" />
+    <link rel="stylesheet" href="/css/dashboard-recepcao.css" />
+</head>
+
+<body>
+    <div class="app">
+        <div id="sidebar-container"></div>
+
+        <main class="content">
+            <div class="page-header">
+                <div class="page-header-row">
+                    <div>
+                        <h1>Todos os Pedidos</h1>
+                        <span class="page-sub">Gerencie, filtre e organize todos os pedidos do laboratório</span>
+                    </div>
+                    <div class="header-actions">
+                        <span class="polling-badge">
+                            <span class="polling-dot"></span> Ao vivo
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de controles: filtros + ordenação + busca -->
+            <div class="controles-row">
+                <!-- Filtro por estado -->
+                <div class="filtros">
+                    <button class="filtro-btn active" data-estado="">Todos</button>
+                    <button class="filtro-btn" data-estado="AGUARDANDO_TRIAGEM">Aguardando Triagem</button>
+                    <button class="filtro-btn" data-estado="AGUARDANDO_INFORMACOES">Ag. Informações</button>
+                    <button class="filtro-btn" data-estado="EM_ANALISE">Em Análise</button>
+                    <button class="filtro-btn" data-estado="EM_MODELAGEM">Em Modelagem</button>
+                    <button class="filtro-btn" data-estado="USINAGEM">Usinagem</button>
+                    <button class="filtro-btn" data-estado="FINALIZADO">Finalizado</button>
+                    <button class="filtro-btn" data-estado="CANCELADO">Cancelado</button>
+                </div>
+            </div>
+
+            <!-- Filtro por prioridade + ordenação + contador -->
+            <div class="ordenacao-row">
+                <label class="filtro-prioridade-label">
+                    <input type="checkbox" id="checkUrgente"> Somente urgentes
+                </label>
+                <span class="ordenacao-label">Ordenar por:</span>
+                <select id="selectOrdem" class="select-ordem">
+                    <option value="recente">Data de criação (mais recente)</option>
+                    <option value="antigo">Data de criação (mais antigo)</option>
+                    <option value="prazo">Prazo de entrega</option>
+                    <option value="urgente">Prioridade (urgente primeiro)</option>
+                </select>
+                <span id="contadorPedidos" class="contador-pedidos"></span>
+            </div>
+
+            <div class="table-card">
+                <table id="tabela">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Prótese</th>
+                            <th>Cor</th>
+                            <th>Material</th>
+                            <th>Dentista</th>
+                            <th>Prioridade</th>
+                            <th>Estado</th>
+                            <th>Prazo de Entrega</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo"></tbody>
+                </table>
+                <p id="vazio" style="display:none" class="vazio-msg">Nenhum pedido encontrado para este filtro.</p>
+                <div id="carregando" class="carregando-msg">Carregando pedidos...</div>
+            </div>
+
+            <p class="ultima-atualizacao">Atualização automática a cada 30s · Última: <span id="ultimaAtualizacao">—</span></p>
+        </main>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/lista-pedidos-recepcao.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* ── CSS específico do Dashboard e Lista da Recepção ─────────────────────
+   Depende de layout.css, dashboard.css, lista.css e dashboard-dentista.css */
+
+/* ── Stat cards específicos da recepção ──────────────────────────────────*/
+.stat-card--triagem::before {
+    background: linear-gradient(180deg, #0369a1, #bae6fd);
+}
+.stat-card--urgente::before {
+    background: linear-gradient(180deg, #b91c1c, #fca5a5);
+}
+
+/* ── Alertas de prazo ────────────────────────────────────────────────────*/
+.alertas-container {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    margin-bottom: 1.5rem;
+}
+
+.alerta {
+    padding: .8rem 1.2rem;
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 500;
+}
+
+.alerta--erro {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1.5px solid var(--danger-border);
+}
+
+.alerta--aviso {
+    background: #fff8e1;
+    color: #92400e;
+    border: 1.5px solid #fcd29a;
+}
+
+/* ── Indicadores de prazo inline na tabela ───────────────────────────────*/
+.prazo-vencido {
+    color: var(--danger);
+    font-weight: 700;
+}
+.prazo-critico {
+    color: #b45309;
+    font-weight: 700;
+}
+.prazo-atencao {
+    color: #92400e;
+    font-weight: 600;
+}
+
+/* ── Linha urgente destacada na tabela ───────────────────────────────────*/
+tr.linha-urgente {
+    background: #fff8f8;
+}
+tr.linha-urgente:hover {
+    background: #fff0f0;
+}
+
+/* ── Barra de controles ──────────────────────────────────────────────────*/
+.controles-row {
+    margin-bottom: .75rem;
+}
+
+/* ── Checkbox "somente urgentes" ─────────────────────────────────────────*/
+.filtro-prioridade-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--danger);
+    cursor: pointer;
+    user-select: none;
+}
+
+.filtro-prioridade-label input[type="checkbox"] {
+    accent-color: var(--danger);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* ── Mensagem de estado vazio ────────────────────────────────────────────*/
+.vazio-msg {
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+    font-size: .93rem;
+}
