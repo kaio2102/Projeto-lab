@@ -167,7 +167,9 @@ td:last-child span {
 
 /* Sobrescreve só tamanho e espaçamento; restante vem de .btn-primary */
 .btn-novo {
+    width: auto;
     white-space: nowrap;
     padding: .6rem 1.2rem;
     font-size: .88rem;
+    transform: translateY(50px);
 }

@@ -18,17 +18,6 @@ body {
     min-height: 100vh;
 }
 
-/* Textura de pontos */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 22px 22px;
-    pointer-events: none;
-    z-index: 0;
-}
-
 /* ─── Splash screen ─── */
 #splash {
     position: fixed;

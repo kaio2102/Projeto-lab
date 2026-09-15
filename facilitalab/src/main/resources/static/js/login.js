@@ -46,7 +46,7 @@ async function login() {
             redirecionarPorPerfil(data.perfil);
 
         } else if (res.status === 401) {
-            mostrar(msg, ['E-mail ou senha incorretos.'], 'erro');
+            mostrar(msg, ['Verifique a sua senha e email e tente novamente.'], 'erro');
         } else if (res.status === 400) {
             try {
                 const errosBack = await res.json();
