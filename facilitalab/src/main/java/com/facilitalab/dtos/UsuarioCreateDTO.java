@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +37,9 @@ public class UsuarioCreateDTO {
     private PerfilEnum perfil;
 
     @NotBlank(message = "O CPF é obrigatório")
-    @Pattern(regexp = "^(\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2})$", message = "CPF inválido")
+    @Pattern(regexp = "^(\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2})$",
+            message = "O CPF deve estar no formato 00000000000 ou 000.000.000-00")
+    //@CPF(message = "CPF inválido")
     private String cpf;
 
     @NotBlank(message = "O telefone é obrigatório")
