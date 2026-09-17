@@ -25,7 +25,7 @@ public class UsuarioService {
     // CREATE
     public UsuarioSaidaDTO criar(UsuarioCreateDTO dto) {
         if (usuarioRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Este email já está em uso.");
+            throw new IllegalArgumentException("Este e-mail já está em uso.");
         }
 
         // Normaliza antes da busca para que "123.456.789-01" e "12345678901" sejam o mesmo CPF

@@ -20,29 +20,29 @@ import org.hibernate.validator.constraints.br.CPF;
 
 public class UsuarioCreateDTO {
 
-    @NotBlank(message = "O nome é obrigatório")
+    @NotBlank(message = "Informe o nome")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
-    @Email(message = "E-mail inválido")
-    @NotBlank(message = "O e-mail é obrigatório")
-    @Size(max = 250, message = "O email deve ter no máximo 250 caracteres")
+    @NotBlank(message = "Informe o e-mail.")
+    @Email(message = "Informe um e-mail válido.")
+    @Size(max = 250, message = "O e-mail deve ter no máximo 250 caracteres")
     private String email;
 
-    @NotBlank(message = "A senha é obrigatória")
+    @NotBlank(message = "Informe a senha.")
     @Size(min = 6, max = 100, message = "A senha deve ter entre 6 e 100 caracteres")
     private String senha;
 
-    @NotNull(message = "O perfil é obrigatório")
+    @NotNull(message = "Selecione o perfil.")
     private PerfilEnum perfil;
 
-    @NotBlank(message = "O CPF é obrigatório")
+    @NotBlank(message = "Informe o CPF")
     @Pattern(regexp = "^(\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2})$",
             message = "O CPF deve estar no formato 00000000000 ou 000.000.000-00")
     //@CPF(message = "CPF inválido")
     private String cpf;
 
-    @NotBlank(message = "O telefone é obrigatório")
+    @NotBlank(message = "Informe um telefone")
     @Pattern(regexp = "^[\\d\\s()\\-+]{8,20}$", message = "Telefone inválido")
     private String telefone;
 

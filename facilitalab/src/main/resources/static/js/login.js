@@ -10,13 +10,13 @@ async function login() {
     const erros = [];
 
     if (!body.email) {
-        erros.push('Digite o seu e-mail.');
+        erros.push('Informe o e-mail.');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
-        erros.push('E-mail inválido.');
+        erros.push('Informe um e-mail válido.');
     }
 
     if (!body.senha) {
-        erros.push('Digite a sua senha.');
+        erros.push('Informe a senha.');
     }
 
     if (erros.length > 0) {
