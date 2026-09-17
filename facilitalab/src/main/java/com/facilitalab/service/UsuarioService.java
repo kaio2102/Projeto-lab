@@ -25,13 +25,13 @@ public class UsuarioService {
     // CREATE
     public UsuarioSaidaDTO criar(UsuarioCreateDTO dto) {
         if (usuarioRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("E-mail já cadastrado: " + dto.getEmail());
+            throw new IllegalArgumentException("Este email já está em uso.");
         }
 
         // Normaliza antes da busca para que "123.456.789-01" e "12345678901" sejam o mesmo CPF
         String cpf = normalizarCpf(dto.getCpf());
         if (usuarioRepository.existsByCpf(cpf)) {
-            throw new IllegalArgumentException("CPF já cadastrado: " + dto.getCpf());
+            throw new IllegalArgumentException("Este CPF já está cadastrado no sistema.");
         }
 
         boolean isDentista = dto.getPerfil() == PerfilEnum.DENTISTA;
