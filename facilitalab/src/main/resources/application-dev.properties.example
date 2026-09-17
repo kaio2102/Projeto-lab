@@ -11,7 +11,7 @@ spring.mail.username=SEU_EMAIL@gmail.com
 spring.mail.password=SUA_APP_PASSWORD_GMAIL
 
 # ── JWT ──────────────────────────────────────────────────────
-jwt.secret=MINIMO_32_CARACTERES_AQUI
+jwt.secret=jwt.secret=facilitalab-chave-secreta-desenvolvimento-2024
 jwt.expiration=28800000
 
 # ── Dev: SQL visível no console ──────────────────────────────

@@ -10,13 +10,13 @@ async function login() {
     const erros = [];
 
     if (!body.email) {
-        erros.push('O e-mail é obrigatório.');
+        erros.push('Digite o seu e-mail.');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
         erros.push('E-mail inválido.');
     }
 
     if (!body.senha) {
-        erros.push('A senha é obrigatória.');
+        erros.push('Digite a sua senha.');
     }
 
     if (erros.length > 0) {
@@ -46,7 +46,7 @@ async function login() {
             redirecionarPorPerfil(data.perfil);
 
         } else if (res.status === 401) {
-            mostrar(msg, ['Verifique a sua senha e email e tente novamente.'], 'erro');
+            mostrar(msg, ['As informações de login que você inseriu estão incorretas.'], 'erro');
         } else if (res.status === 400) {
             try {
                 const errosBack = await res.json();
