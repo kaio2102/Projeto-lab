@@ -50,7 +50,7 @@ public class PedidoService {
         Usuario autenticado = getUsuarioAutenticado();
 
         Usuario dentista = usuarioRepository.findById(autenticado.getId())
-                .orElseThrow(() -> new RuntimeException("Dentista não encontrado.");
+                .orElseThrow(() -> new RuntimeException("Dentista não encontrado."));
 
         Pedido pedido = new Pedido();
         pedido.setCor(dto.getCor());
