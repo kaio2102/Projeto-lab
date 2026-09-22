@@ -167,21 +167,21 @@ body {
 
 /* ─── Animações disparadas por body.playing ─── */
 /* Timings espelham o timeline do anime.js original: cada delay é o start time calculado */
-body.playing #splash-ring          { animation: appear-ring           .6s ease-out                 0s   both; }
-body.playing #ring-path            { animation: draw-ring              .9s ease-in-out             .3s  both; }
-body.playing #splash-logo          { animation: appear-scale           .5s ease-out                .7s  both; }
-body.playing #tooth-body           { animation: draw-tooth-body        .7s ease-in-out             .8s  both; }
-body.playing #tooth-detail         { animation: draw-tooth-detail      .5s ease-in-out            1.3s  both; }
-body.playing #brand-line1          { animation: fade-in-up             .5s ease-out               1.7s  both; }
-body.playing #brand-line2          { animation: fade-in                .4s ease-out               2.0s  both; }
-body.playing #tagline              { animation: fade-in                .4s ease-out               2.2s  both; }
-body.playing #progress-wrap        { animation: fade-in                .3s ease-out               2.6s  both; }
-body.playing #progress-fill        { animation: fill-bar              1.3s cubic-bezier(.4,0,.2,1) 2.8s  both; }
-body.playing #dot-row              { animation: fade-in                .2s ease-out               3.0s  both; }
-body.playing .dot-item:nth-child(1){ animation: dot-pulse              .3s ease-in-out  3.1s 3 alternate both; }
-body.playing .dot-item:nth-child(2){ animation: dot-pulse              .3s ease-in-out  3.3s 3 alternate both; }
-body.playing .dot-item:nth-child(3){ animation: dot-pulse              .3s ease-in-out  3.5s 3 alternate both; }
-body.playing #splash               { animation: splash-exit            .6s cubic-bezier(.7,0,1,1)  4.5s  both; }
+body.playing #splash-ring          { animation: appear-ring           .12s ease-out                 0s    both; }
+body.playing #ring-path            { animation: draw-ring              .18s ease-in-out             .06s  both; }
+body.playing #splash-logo          { animation: appear-scale           .1s  ease-out                .14s  both; }
+body.playing #tooth-body           { animation: draw-tooth-body        .14s ease-in-out             .16s  both; }
+body.playing #tooth-detail         { animation: draw-tooth-detail      .1s  ease-in-out             .25s  both; }
+body.playing #brand-line1          { animation: fade-in-up             .1s  ease-out                .33s  both; }
+body.playing #brand-line2          { animation: fade-in                .08s ease-out                .39s  both; }
+body.playing #tagline              { animation: fade-in                .08s ease-out                .43s  both; }
+body.playing #progress-wrap        { animation: fade-in                .06s ease-out                .51s  both; }
+body.playing #progress-fill        { animation: fill-bar              .25s cubic-bezier(.4,0,.2,1)   .55s  both; }
+body.playing #dot-row              { animation: fade-in                .04s ease-out                .59s  both; }
+body.playing .dot-item:nth-child(1){ animation: dot-pulse              .06s ease-in-out   .61s 3 alternate both; }
+body.playing .dot-item:nth-child(2){ animation: dot-pulse              .06s ease-in-out   .65s 3 alternate both; }
+body.playing .dot-item:nth-child(3){ animation: dot-pulse              .06s ease-in-out   .69s 3 alternate both; }
+body.playing #splash               { animation: splash-exit            .12s cubic-bezier(.7,0,1,1)  .88s   both; }
 
 /* ─── Tela de login — oculta até a animação revelar ─── */
 #login-screen {
@@ -192,14 +192,14 @@ body.playing #splash               { animation: splash-exit            .6s cubic
 #login-screen.show {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity .5s ease, transform .5s ease;
+    transition: opacity .1s ease, transform .1s ease;
 }
 
 /* Elementos do card entram em cascata quando o login aparece */
-#login-screen.show .login-brand              { animation: card-slide-up .4s  ease-out  .3s  both; }
-#login-screen.show .login-field:nth-child(1) { animation: card-slide-up .35s ease-out  .45s both; }
-#login-screen.show .login-field:nth-child(2) { animation: card-slide-up .35s ease-out  .52s both; }
-#login-screen.show #btnLogin                 { animation: card-slide-up .35s ease-out  .67s both; }
+#login-screen.show .login-brand              { animation: card-slide-up .08s ease-out  .06s both; }
+#login-screen.show .login-field:nth-child(1) { animation: card-slide-up .07s ease-out  .09s both; }
+#login-screen.show .login-field:nth-child(2) { animation: card-slide-up .07s ease-out  .1s  both; }
+#login-screen.show #btnLogin                 { animation: card-slide-up .07s ease-out  .13s both; }
 
 /* ─── Página centralizada — sem sidebar ─── */
 .login-wrapper {

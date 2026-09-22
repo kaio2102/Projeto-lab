@@ -91,9 +91,9 @@ window.addEventListener('load', () => {
 
         setTimeout(() => {
             document.getElementById('login-screen').classList.add('show');
-        }, 4900);
+        }, 950);
 
-    }, 400);
+    }, 100);
 });
 
 // Permite submeter com Enter em qualquer campo do formulário
