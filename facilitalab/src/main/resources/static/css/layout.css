@@ -31,20 +31,28 @@
     --success-bg: #f0f9f4;
     --success-border: #b7e4ca;
 
+    /* Feedback — atenção/produção */
+    --warning: #b45309;
+    --warning-bg: #fdf0dd;
+    --warning-border: #f3cd93;
+
     /* Sombras reutilizáveis */
-    --shadow-card: 0 4px 6px rgba(26,58,92,0.06), 0 20px 40px rgba(26,58,92,0.08);
-    --shadow-btn: 0 4px 14px rgba(45,106,159,0.3);
-    --shadow-btn-hover: 0 6px 18px rgba(45,106,159,0.35);
+    --shadow-card: 0 4px 6px rgba(26, 58, 92, 0.06), 0 20px 40px rgba(26, 58, 92, 0.08);
+    --shadow-btn: 0 4px 14px rgba(45, 106, 159, 0.3);
+    --shadow-btn-hover: 0 6px 18px rgba(45, 106, 159, 0.35);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Segoe UI', sans-serif;
     background: var(--bg);
-    background-image:
-            radial-gradient(ellipse at 70% 20%, rgba(45,106,159,0.25) 0%, transparent 60%),
-            radial-gradient(ellipse at 20% 80%, rgba(123,94,167,0.15) 0%, transparent 55%);
+    background-image: radial-gradient(ellipse at 70% 20%, rgba(45, 106, 159, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(123, 94, 167, 0.15) 0%, transparent 55%);
     min-height: 100vh;
 }
 
@@ -64,7 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    box-shadow: 4px 0 24px rgba(26,58,92,0.18);
+    box-shadow: 4px 0 24px rgba(26, 58, 92, 0.18);
 }
 
 .sidebar-brand {
@@ -72,7 +80,7 @@ body {
     display: flex;
     align-items: center;
     gap: .6rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     margin-bottom: .75rem;
 }
 
@@ -86,7 +94,7 @@ body {
     justify-content: center;
     font-size: 1rem;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(45,106,159,0.4);
+    box-shadow: 0 2px 8px rgba(45, 106, 159, 0.4);
 }
 
 .sidebar-brand-text {
@@ -99,7 +107,7 @@ body {
 .nav-section {
     font-size: .65rem;
     font-weight: 700;
-    color: rgba(200,223,240,0.4);
+    color: rgba(200, 223, 240, 0.4);
     letter-spacing: .1em;
     text-transform: uppercase;
     padding: .75rem 1.25rem .3rem;
@@ -128,13 +136,13 @@ nav {
 }
 
 .nav-item:hover {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
     color: #ffffff;
     transform: translateX(2px);
 }
 
 .nav-item.active {
-    background: rgba(168,212,245,0.13);
+    background: rgba(168, 212, 245, 0.13);
     color: #ffffff;
     border-left-color: var(--sidebar-active-border);
     font-weight: 600;
@@ -185,7 +193,7 @@ nav {
     letter-spacing: .02em;
     cursor: pointer;
     transition: background .18s ease, color .18s ease, border-color .18s ease,
-                box-shadow .18s ease, transform .15s ease;
+    box-shadow .18s ease, transform .15s ease;
 }
 
 .btn-logout:hover {
@@ -204,9 +212,9 @@ nav {
 .sidebar-footer {
     margin-top: auto;
     padding: .85rem 1.25rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     font-size: .75rem;
-    color: rgba(200,223,240,0.35);
+    color: rgba(200, 223, 240, 0.35);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -286,28 +294,27 @@ nav {
 
 /* Botão primário — usado em formulários (button.btn-primary) e links de ação (a.btn-primary) */
 .btn-primary {
-    display: inline-block;
-    background: var(--accent);
-    color: #ffffff;
-    border: none;
+    --bs-btn-bg: var(--accent);
+    --bs-btn-border-color: var(--accent);
+    --bs-btn-hover-bg: var(--accent-hover);
+    --bs-btn-hover-border-color: var(--accent-hover);
+    --bs-btn-active-bg: var(--accent-hover);
+    --bs-btn-active-border-color: var(--accent-hover);
+    --bs-btn-disabled-bg: var(--accent);
+    --bs-btn-disabled-border-color: var(--accent);
+    --bs-btn-focus-shadow-rgb: 45, 106, 159;
     border-radius: 10px;
-     width: 100%;
-    padding: .85rem;
-    font-size: 1rem;
-    text-align: center;
-    font-size: .98rem;
     font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    letter-spacing: .02em;
-    text-decoration: none;
-    transition: background .2s, transform .1s, box-shadow .2s;
     box-shadow: var(--shadow-btn);
 }
 
-.btn-primary:hover { background: var(--accent-hover); box-shadow: var(--shadow-btn-hover); }
-.btn-primary:active { transform: scale(.98); }
-.btn-primary:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; }
+.btn-primary:hover {
+    box-shadow: var(--shadow-btn-hover);
+}
+
+.btn-primary:active {
+    transform: scale(.98);
+}
 
 /* Componente de feedback de formulários (sucesso e erro) */
 #mensagem {
@@ -318,7 +325,9 @@ nav {
     font-weight: 500;
 }
 
-#mensagem p { margin: .2rem 0; }
+#mensagem p {
+    margin: .2rem 0;
+}
 
 #mensagem.sucesso {
     display: block;
@@ -332,4 +341,18 @@ nav {
     background: var(--danger-bg);
     color: var(--danger);
     border: 1.5px solid var(--danger-border);
+}
+
+/* Toast de feedback (erro) — reutilizável em qualquer página */
+.toast-erro {
+    --bs-toast-bg: var(--danger-bg);
+    --bs-toast-color: var(--danger);
+    --bs-toast-border-color: var(--danger-border);
+    border-radius: 10px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.toast-erro .toast-body p {
+    margin: .2rem 0;
 }

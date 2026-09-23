@@ -285,28 +285,24 @@ body.playing #splash               { animation: splash-exit            .12s cubi
     text-transform: uppercase;
 }
 
-.login-field input {
+.login-field .form-control {
+    --bs-body-bg: var(--input-bg);
     background: var(--input-bg);
     border: 1.5px solid var(--border);
     border-radius: 10px;
     padding: .75rem 1rem;
     font-size: .95rem;
-    font-family: inherit;
     color: var(--text);
-    outline: none;
-    width: 100%;
     transition: border-color .2s, box-shadow .2s, background .2s;
 }
 
-.login-field input::placeholder { color: #b0bec8; }
+.login-field .form-control::placeholder { color: #b0bec8; }
 
-.login-field input:focus {
+.login-field .form-control:focus {
     border-color: var(--accent);
     background: var(--card-bg);
     box-shadow: 0 0 0 4px rgba(45,106,159,0.12);
 }
-
-
 
 /* ─── Botão temporário — acesso sem autenticação ─── */
 .btn-skip {

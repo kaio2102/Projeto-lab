@@ -16,30 +16,6 @@
     gap: 1.25rem;
     box-shadow: 0 2px 8px rgba(26,58,92,0.06), 0 8px 24px rgba(26,58,92,0.06);
     transition: box-shadow .25s, transform .25s;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Detalhe decorativo lateral — azul (padrão) */
-.stat-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, #2d6a9f, #a8d4f5);
-    border-radius: 18px 0 0 18px;
-}
-
-/* Decorativo laranja — Pedidos em Produção */
-.stat-card--producao::before {
-    background: linear-gradient(180deg, #d97706, #fcd29a);
-}
-
-/* Decorativo verde — Pedidos Concluídos */
-.stat-card--concluido::before {
-    background: linear-gradient(180deg, #1e7e4a, #7dd4a8);
 }
 
 .stat-card:hover {
@@ -48,23 +24,19 @@
 }
 
 .stat-icon {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     width: 54px;
     height: 54px;
-    background: linear-gradient(135deg, #e8f1f9 0%, #d0e6f5 100%);
+    background: var(--accent-bg);
+    color: var(--accent);
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(45,106,159,0.12);
 }
 
-.stat-info {
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-}
+.stat-info { display: flex; flex-direction: column; gap: .35rem; }
 
 .stat-label {
     font-size: .75rem;
@@ -81,3 +53,11 @@
     line-height: 1;
     letter-spacing: -.02em;
 }
+
+/* Produção — ícone e número assumem o tom de atenção */
+.stat-card--producao .stat-icon { background: var(--warning-bg); color: var(--warning); }
+.stat-card--producao .stat-value { color: var(--warning); }
+
+/* Concluído — ícone e número assumem o tom de sucesso */
+.stat-card--concluido .stat-icon { background: var(--success-bg); color: var(--success); }
+.stat-card--concluido .stat-value { color: var(--success); }

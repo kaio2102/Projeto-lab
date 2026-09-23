@@ -1,6 +1,5 @@
 async function login() {
     const btn = document.getElementById('btnLogin');
-    const msg = document.getElementById('mensagem');
 
     const body = {
         email: document.getElementById('email').value.trim(),
@@ -20,45 +19,43 @@ async function login() {
     }
 
     if (erros.length > 0) {
-        mostrar(msg, erros, 'erro');
+        mostrar(erros);
         return;
     }
 
     btn.disabled = true;
     btn.textContent = 'Entrando...';
-    msg.className = '';
-    msg.style.display = 'none';
 
     try {
         const res = await fetch('/auth/login', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body),
         });
 
         if (res.ok) {
             const data = await res.json();
-            localStorage.setItem('token',  data.token);
-            localStorage.setItem('nome',   data.nome);
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('nome', data.nome);
             localStorage.setItem('perfil', data.perfil);
-            localStorage.setItem('id',     data.id);   // ID necessário para buscar pedidos do dentista
+            localStorage.setItem('id', data.id);   // ID necessário para buscar pedidos do dentista
 
             redirecionarPorPerfil(data.perfil);
 
         } else if (res.status === 401) {
-            mostrar(msg, ['As informações de login que você inseriu estão incorretas.'], 'erro');
+            mostrar(['As informações de login que você inseriu estão incorretas.']);
         } else if (res.status === 400) {
             try {
                 const errosBack = await res.json();
-                mostrar(msg, errosBack.errors ?? ['Erro de validação.'], 'erro');
+                mostrar(errosBack.errors ?? ['Erro de validação.']);
             } catch {
-                mostrar(msg, ['Erro de validação.'], 'erro');
+                mostrar(['Erro de validação.']);
             }
         } else {
-            mostrar(msg, [`Erro ${res.status}. Tente novamente.`], 'erro');
+            mostrar([`Erro ${res.status}. Tente novamente.`]);
         }
     } catch {
-        mostrar(msg, ['Não foi possível conectar ao servidor.'], 'erro');
+        mostrar(['Não foi possível conectar ao servidor.']);
     } finally {
         btn.disabled = false;
         btn.textContent = 'Entrar';
@@ -69,20 +66,24 @@ function redirecionarPorPerfil(perfil) {
     const rotas = {
         DENTISTA: '/dashboard-dentista',
         RECEPCAO: '/dashboard-recepcao',
-        CADISTA:  '/dashboard-cadista',
-        GESTOR:   '/dashboard',
+        CADISTA: '/dashboard-cadista',
+        GESTOR: '/dashboard',
     };
     window.location.href = rotas[perfil] ?? '/dashboard';
 }
 
-function mostrar(el, textos, tipo) {
-    el.innerHTML = Array.isArray(textos)
+/* A função mostrar() dispara uma instância de Toast do Bootstrap */
+function mostrar(textos) {
+    const toastEl = document.getElementById('toastErro');
+    const body = document.getElementById('toastErroBody');
+
+    body.innerHTML = Array.isArray(textos)
         ? textos.map(t => `<p>${t}</p>`).join('')
         : `<p>${textos}</p>`;
-    el.className = tipo;
-    el.style.display = 'block';
-}
 
+    const toast = bootstrap.Toast.getOrCreateInstance(toastEl, {delay: 5000});
+    toast.show();
+}
 
 /* ─── Animação da splash — CSS puro, sem dependências externas ─── */
 window.addEventListener('load', () => {
