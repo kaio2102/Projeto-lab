@@ -34,14 +34,19 @@
 }
 
 @keyframes pulsar {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: .45; transform: scale(.75); }
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: .45;
+        transform: scale(.75);
+    }
 }
 
-/* ── Stat card — pendente (amarelo) ──────────────────────────────────────*/
-.stat-card--pendente::before {
-    background: linear-gradient(180deg, #b45309, #fcd29a);
-}
+/* ── Stat card — pendente (neutro) ──────────────────────────────────────*/
+.stat-card--pendente .stat-icon { background: var(--neutral-bg); color: var(--neutral); }
+.stat-card--pendente .stat-value { color: var(--neutral); }
 
 /* ── Seção "Pedidos Recentes" ────────────────────────────────────────────*/
 .section-header {
@@ -87,10 +92,11 @@
 
 /* Prioridade */
 .badge--urgente {
-    background: #fff1f0;
-    color: #c0392b;
-    border: 1.5px solid #f5c6c6;
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1.5px solid var(--danger-border);
 }
+
 .badge--normal {
     background: var(--accent-bg);
     color: var(--accent);
@@ -98,15 +104,59 @@
 }
 
 /* Estados */
-.badge--triagem   { background: #fff8e1; color: #b45309; border: 1.5px solid #fcd29a; }
-.badge--info      { background: #fff3e0; color: #a0521b; border: 1.5px solid #f7c89a; }
-.badge--aprovacao { background: #e8f1fd; color: #2c5fa8; border: 1.5px solid #b8d0f8; }
-.badge--analise   { background: #f3e8ff; color: #7c3aed; border: 1.5px solid #d8b4fe; }
-.badge--modelagem { background: #e0f2fe; color: #0369a1; border: 1.5px solid #bae6fd; }
-.badge--correcao  { background: #fff0f6; color: #be185d; border: 1.5px solid #fbcfe8; }
-.badge--usinagem  { background: #f0fdf4; color: #166534; border: 1.5px solid #bbf7d0; }
-.badge--finalizado{ background: var(--success-bg); color: var(--success); border: 1.5px solid var(--success-border); }
-.badge--cancelado { background: #f9f9f9; color: #6b7280; border: 1.5px solid #e5e7eb; }
+.badge--triagem {
+    background: #fff8e1;
+    color: #b45309;
+    border: 1.5px solid #fcd29a;
+}
+
+.badge--info {
+    background: #fff3e0;
+    color: #a0521b;
+    border: 1.5px solid #f7c89a;
+}
+
+.badge--aprovacao {
+    background: #e8f1fd;
+    color: #2c5fa8;
+    border: 1.5px solid #b8d0f8;
+}
+
+.badge--analise {
+    background: #f3e8ff;
+    color: #7c3aed;
+    border: 1.5px solid #d8b4fe;
+}
+
+.badge--modelagem {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1.5px solid #bae6fd;
+}
+
+.badge--correcao {
+    background: #fff0f6;
+    color: #be185d;
+    border: 1.5px solid #fbcfe8;
+}
+
+.badge--usinagem {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1.5px solid #bbf7d0;
+}
+
+.badge--finalizado {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1.5px solid var(--success-border);
+}
+
+.badge--cancelado {
+    background: #f9f9f9;
+    color: #6b7280;
+    border: 1.5px solid #e5e7eb;
+}
 
 /* ── Rodapé de atualização ───────────────────────────────────────────────*/
 .ultima-atualizacao {

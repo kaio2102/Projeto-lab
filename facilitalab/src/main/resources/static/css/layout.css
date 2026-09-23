@@ -36,6 +36,11 @@
     --warning-bg: #fdf0dd;
     --warning-border: #f3cd93;
 
+    /* Feedback — neutro/aguardando */
+    --neutral: #64748b;
+    --neutral-bg: #eef1f5;
+    --neutral-border: #d7dee6;
+
     /* Sombras reutilizáveis */
     --shadow-card: 0 4px 6px rgba(26, 58, 92, 0.06), 0 20px 40px rgba(26, 58, 92, 0.08);
     --shadow-btn: 0 4px 14px rgba(45, 106, 159, 0.3);

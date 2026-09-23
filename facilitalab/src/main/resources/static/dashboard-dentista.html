@@ -4,94 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard – Dentista | Facilita Lab</title>
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="/css/dashboard.css" />
-    <link rel="stylesheet" href="/css/dashboard-dentista.css" />
-    <link rel="stylesheet" href="/css/lista.css" /> 
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.13.1/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="/css/layout.css"/>
+    <link rel="stylesheet" href="/css/dashboard.css"/>
+    <link rel="stylesheet" href="/css/dashboard-dentista.css"/>
+    <link rel="stylesheet" href="/css/lista.css"/>
+    <link rel="stylesheet" href="/css/cadastro-pedido.css"/>
 </head>
 
 <body>
-    <div class="app">
-        <div id="sidebar-container"></div>
+<div class="app">
+    <div id="sidebar-container"></div>
 
-        <main class="content">
-            <div class="page-header">
-                <div class="page-header-row">
-                    <div>
-                        <h1>Olá, <span id="nomeUsuario">—</span> 👋</h1>
-                        <span class="page-sub">Acompanhe seus pedidos em tempo real</span>
-                    </div>
-                    <div class="header-actions">
+    <main class="content">
+        <div class="page-header">
+            <div class="page-header-row">
+                <div>
+                    <h1>Olá, <span id="nomeUsuario"> </span></h1>
+                    <span class="page-sub">Acompanhe seus pedidos em tempo real</span>
+                </div>
+                <div class="header-actions">
                         <span class="polling-badge" id="pollingBadge">
                             <span class="polling-dot"></span> Ao vivo
                         </span>
-                        <a href="/cadastro-pedido" class="btn-primary btn-novo">+ Novo Pedido</a>
-                    </div>
+                    <button type="button" class="btn btn-primary btn-novo" onclick="abrirModalCadastroPedido()">
+                        <i class="bi bi-plus-lg"></i> Novo Pedido
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Cards de estatísticas -->
-            <div class="cards-grid" id="statsGrid">
-                <div class="stat-card">
-                    <div class="stat-icon">📋</div>
-                    <div class="stat-info">
-                        <span class="stat-label">Total de Pedidos</span>
-                        <span class="stat-value" id="statTotal">—</span>
-                    </div>
-                </div>
-                <div class="stat-card stat-card--pendente">
-                    <div class="stat-icon">⏳</div>
-                    <div class="stat-info">
-                        <span class="stat-label">Aguardando</span>
-                        <span class="stat-value" id="statAguardando">—</span>
-                    </div>
-                </div>
-                <div class="stat-card stat-card--producao">
-                    <div class="stat-icon">🔬</div>
-                    <div class="stat-info">
-                        <span class="stat-label">Em Produção</span>
-                        <span class="stat-value" id="statProducao">—</span>
-                    </div>
-                </div>
-                <div class="stat-card stat-card--concluido">
-                    <div class="stat-icon">✅</div>
-                    <div class="stat-info">
-                        <span class="stat-label">Finalizados</span>
-                        <span class="stat-value" id="statFinalizado">—</span>
-                    </div>
+        <div class="cards-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-clipboard-check-fill"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Total de Pedidos</span>
+                    <span class="stat-value" id="statTotal">—</span>
                 </div>
             </div>
-
-            <!-- Pedidos recentes -->
-            <div class="section-header">
-                <h2 class="section-title">Meus Pedidos Recentes</h2>
-                <a href="/meus-pedidos" class="link-ver-todos">Ver todos →</a>
+            <div class="stat-card stat-card--pendente">
+                <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Aguardando</span>
+                    <span class="stat-value" id="statAguardando">—</span>
+                </div>
             </div>
-
-            <div class="table-card">
-                <table id="tabela">
-                    <thead>
-                        <tr>
-                            <th>Tipo de Prótese</th>
-                            <th>Material</th>
-                            <th>Prioridade</th>
-                            <th>Estado</th>
-                            <th>Prazo</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="corpo"></tbody>
-                </table>
-                <p id="vazio" style="display:none">Você ainda não possui pedidos cadastrados.</p>
-                <div id="carregando" class="carregando-msg">Carregando pedidos...</div>
+            <div class="stat-card stat-card--producao">
+                <div class="stat-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Em Produção</span>
+                    <span class="stat-value" id="statProducao">—</span>
+                </div>
             </div>
+            <div class="stat-card stat-card--concluido">
+                <div class="stat-icon"><i class="bi bi-check-circle-fill"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Finalizados</span>
+                    <span class="stat-value" id="statFinalizado">—</span>
+                </div>
+            </div>
+        </div>
 
-            <p class="ultima-atualizacao">Última atualização: <span id="ultimaAtualizacao">—</span></p>
-        </main>
+        <div class="section-header">
+            <h2 class="section-title">Meus Pedidos Recentes</h2>
+            <a href="/meus-pedidos" class="link-ver-todos">Ver todos <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="table-card">
+            <table id="tabela">
+                <thead>
+                <tr>
+                    <th>Tipo de Prótese</th>
+                    <th>Material</th>
+                    <th>Prioridade</th>
+                    <th>Estado</th>
+                    <th>Prazo</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody id="corpo"></tbody>
+            </table>
+            <p id="vazio" style="display:none">Você ainda não possui pedidos cadastrados.</p>
+            <div id="carregando" class="carregando-msg">Carregando pedidos...</div>
+        </div>
+
+        <p class="ultima-atualizacao">Última atualização: <span id="ultimaAtualizacao">—</span></p>
+    </main>
+</div>
+
+<!-- Toasts de feedback -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080">
+    <div id="toastErroPedido" class="toast toast-erro align-items-center border-0" role="alert" aria-live="assertive"
+         aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toastErroPedidoBody"></div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+        </div>
     </div>
+    <div id="toastSucessoPedido" class="toast toast-sucesso align-items-center border-0" role="alert"
+         aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toastSucessoPedidoBody"></div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+        </div>
+    </div>
+</div>
 
-    <script src="/js/auth.js"></script>
-    <script src="/js/sidebar.js"></script>
-    <script src="/js/dashboard-dentista.js"></script>
+<!-- Modal: Cadastro de pedido -->
+<div class="modal fade" id="modalCadastroPedido" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Novo Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body" id="modalCadastroPedidoBody"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Detalhes/edição de pedido -->
+<div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes do Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body" id="modalEditarPedidoBody"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/sidebar.js"></script>
+<script src="/js/masks.js"></script>
+<script src="/js/cadastro-pedido.js"></script>
+<script src="/js/editar-pedido.js"></script>
+<script src="/js/dashboard-dentista.js"></script>
 </body>
 </html>
