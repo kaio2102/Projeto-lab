@@ -1,5 +1,5 @@
 function atualizarCampos() {
-    const perfil   = document.getElementById('perfil').value;
+    const perfil = document.getElementById('perfil').value;
     const campoCro = document.getElementById('campo-cro');
 
     if (perfil === 'DENTISTA') {
@@ -11,18 +11,18 @@ function atualizarCampos() {
 }
 
 async function cadastrar() {
-    const btn  = document.getElementById('btnCadastrar');
-    const msg  = document.getElementById('mensagem');
+    const btn = document.getElementById('btnCadastrar');
+    const msg = document.getElementById('mensagem');
     const perfil = document.getElementById('perfil').value;
 
     const body = {
-        nome:     document.getElementById('nome').value.trim(),
-        email:    document.getElementById('email').value.trim(),
-        senha:    document.getElementById('senha').value,
+        nome: document.getElementById('nome').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        senha: document.getElementById('senha').value,
         perfil,
-        cpf:      document.getElementById('cpf').value.trim(),
+        cpf: document.getElementById('cpf').value.trim(),
         telefone: document.getElementById('telefone').value.trim(),
-        cro:      perfil === 'DENTISTA' ? (document.getElementById('cro').value.trim() || null) : null,
+        cro: perfil === 'DENTISTA' ? (document.getElementById('cro').value.trim() || null) : null,
     };
 
     // --- Validação no front ---
@@ -82,12 +82,13 @@ async function cadastrar() {
     try {
         const res = await authFetch('/usuarios', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
         });
 
         if (res.status === 201) {
-            window.location.href = '/lista-usuarios';
+            bootstrap.Modal.getInstance(document.getElementById('modalCadastroUsuario')).hide();
+            await carregarUsuarios();
         } else if (res.status === 400) {
             try {
                 const errosBackend = await res.json();

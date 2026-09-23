@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import java.time.Duration;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,8 +36,6 @@ public class CadastroUsuarioE2ETest {
         driver.get("http://localhost:8081/login");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        driver.get("http://localhost:8081/login");
 
         WebElement email = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("email"))
@@ -75,49 +75,67 @@ public class CadastroUsuarioE2ETest {
                 driver.getCurrentUrl()
         );
 
+        // Aguarda o botão "Cadastrar Usuário" aparecer
         WebElement botaoCadastrar = wait.until(
                 ExpectedConditions.elementToBeClickable(
-                        By.cssSelector("a[href='/cadastro-usuario']")
+                        By.cssSelector("button.btn-novo")
                 )
         );
 
         botaoCadastrar.click();
 
-        wait.until(ExpectedConditions.urlToBe(
-                "http://localhost:8081/cadastro-usuario"
-        ));
-
-        assertEquals(
-                "http://localhost:8081/cadastro-usuario",
-                driver.getCurrentUrl()
+        // Aguarda o modal de cadastro ficar visível
+        WebElement modalCadastro = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("modalCadastroUsuario")
+                )
         );
 
-        // Preenche o formulário de cadastro
+        // Aguarda o formulário ser carregado dentro do modal
+        wait.until(
+                ExpectedConditions.visibilityOfNestedElementsLocatedBy(
+                        modalCadastro,
+                        By.id("nome")
+                )
+        );
+
+        // Preenche o formulário
         WebElement nome = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("nome"))
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("nome")
+                )
         );
 
         WebElement emailCadastro = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("email"))
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("email")
+                )
         );
 
         WebElement senhaCadastro = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("senha"))
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("senha")
+                )
         );
 
         WebElement cpf = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("cpf"))
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("cpf")
+                )
         );
 
         WebElement telefone = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("telefone"))
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("telefone")
+                )
         );
 
         nome.sendKeys("Usuario Teste E2E");
 
-        emailCadastro.sendKeys(
-                "e2e." + System.currentTimeMillis() + "@teste.com"
-        );
+        String emailTeste =
+                "e2e." + System.currentTimeMillis() + "@teste.com";
+
+        emailCadastro.sendKeys(emailTeste);
 
         senhaCadastro.sendKeys("Senha@123");
 
@@ -127,27 +145,41 @@ public class CadastroUsuarioE2ETest {
 
         // Seleciona o perfil
         WebElement perfil = wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("perfil"))
+                ExpectedConditions.elementToBeClickable(
+                        By.id("perfil")
+                )
         );
 
         perfil.sendKeys("RECEPCAO");
 
         // Clica em cadastrar
         WebElement botaoCadastrarUsuario = wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("btnCadastrar"))
+                ExpectedConditions.elementToBeClickable(
+                        By.id("btnCadastrar")
+                )
         );
 
         botaoCadastrarUsuario.click();
 
-        // Após o cadastro bem-sucedido,
-        // a aplicação deve voltar para a lista de usuários
-        wait.until(ExpectedConditions.urlToBe(
-                "http://localhost:8081/lista-usuarios"
-        ));
+        // Aguarda o modal ser fechado após o cadastro
+        wait.until(
+                ExpectedConditions.invisibilityOfElementLocated(
+                        By.id("modalCadastroUsuario")
+                )
+        );
+
+        // Aguarda o usuário aparecer novamente na tabela
+        WebElement usuarioCadastrado = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath(
+                                "//tbody[@id='corpo']//td[normalize-space()='Usuario Teste E2E']"
+                        )
+                )
+        );
 
         assertEquals(
-                "http://localhost:8081/lista-usuarios",
-                driver.getCurrentUrl()
+                "Usuario Teste E2E",
+                usuarioCadastrado.getText()
         );
     }
 }

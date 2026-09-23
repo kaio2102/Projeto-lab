@@ -2,8 +2,38 @@
 let todosUsuarios = [];
 
 function editar(id) {
-    window.location.href = `/editar-usuario/${id}`;
+    abrirModalEditar(id);
 }
+
+async function abrirModalCadastro() {
+    const body = document.getElementById('modalCadastroUsuarioBody');
+    const res = await fetch('/fragments/form-cadastro-usuario.html');
+    body.innerHTML = await res.text();
+
+    inicializarMascaras();
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCadastroUsuario')).show();
+}
+
+async function abrirModalEditar(id) {
+    const body = document.getElementById('modalEditarUsuarioBody');
+    const res = await fetch('/fragments/form-editar-usuario.html');
+    body.innerHTML = await res.text();
+
+    inicializarMascaras();
+    inicializarEdicaoUsuario(id);
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEditarUsuario')).show();
+}
+
+// Limpa o conteúdo ao fechar — evita ids duplicados (#nome, #email...)
+// se os dois modais forem abertos em sequência na mesma sessão de página
+document.getElementById('modalCadastroUsuario').addEventListener('hidden.bs.modal', () => {
+    document.getElementById('modalCadastroUsuarioBody').innerHTML = '';
+});
+document.getElementById('modalEditarUsuario').addEventListener('hidden.bs.modal', () => {
+    document.getElementById('modalEditarUsuarioBody').innerHTML = '';
+});
 
 async function deletar(id, btn) {
     if (!confirm('Deseja realmente excluir este usuário?')) return;
@@ -14,7 +44,6 @@ async function deletar(id, btn) {
     try {
         const res = await authFetch(`/usuarios/${id}`, { method: 'DELETE' });
         if (res.status === 204) {
-            // Remove do array e re-renderiza para manter o filtro ativo
             todosUsuarios = todosUsuarios.filter(u => u.id !== id);
             const perfilAtivo = document.querySelector('.filtro-btn.active')?.dataset.perfil ?? '';
             renderizar(perfilAtivo);
@@ -96,7 +125,8 @@ async function carregarUsuarios() {
     try {
         const res = await authFetch('/usuarios');
         todosUsuarios = await res.json();
-        renderizar('');
+        const perfilAtivo = document.querySelector('.filtro-btn.active')?.dataset.perfil ?? '';
+        renderizar(perfilAtivo);
     } catch {
         vazio.textContent    = 'Erro ao carregar usuários.';
         vazio.style.display  = 'block';

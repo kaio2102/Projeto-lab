@@ -1,4 +1,4 @@
-const id = window.location.pathname.split('/').pop();
+let idUsuarioEdicao = null;
 
 function atualizarCampos() {
     const perfil   = document.getElementById('perfil').value;
@@ -14,14 +14,13 @@ function atualizarCampos() {
 
 async function carregarUsuario() {
     try {
-        const res = await authFetch(`/usuarios/${id}`);
+        const res = await authFetch(`/usuarios/${idUsuarioEdicao}`);
         if (!res.ok) throw new Error();
         const u = await res.json();
 
         document.getElementById('nome').value     = u.nome;
         document.getElementById('email').value    = u.email;
         document.getElementById('perfil').value   = u.perfil;
-        // CPF e telefone vêm com somente dígitos do banco; formata para exibição
         document.getElementById('cpf').value      = formatarCpf(u.cpf);
         document.getElementById('telefone').value = formatarTelefone(u.telefone);
 
@@ -30,7 +29,6 @@ async function carregarUsuario() {
         if (u.perfil === 'DENTISTA') {
             document.getElementById('cro').value = u.cro ?? '';
         }
-
     } catch {
         mostrar(document.getElementById('mensagem'), ['Erro ao carregar dados do usuário.'], 'erro');
     }
@@ -54,7 +52,6 @@ async function salvar() {
 
     if (senha) body.senha = senha;
 
-    // --- Validação ---
     const erros = [];
 
     if (!body.nome) {
@@ -101,21 +98,21 @@ async function salvar() {
         return;
     }
 
-    // --- Envio ---
     btn.disabled = true;
     btn.textContent = 'Salvando...';
     msg.className = '';
     msg.style.display = 'none';
 
     try {
-        const res = await authFetch(`/usuarios/${id}`, {
+        const res = await authFetch(`/usuarios/${idUsuarioEdicao}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
 
         if (res.status === 200) {
-            window.location.href = '/lista-usuarios';
+            bootstrap.Modal.getInstance(document.getElementById('modalEditarUsuario')).hide();
+            await carregarUsuarios();
         } else if (res.status === 400) {
             try {
                 const errosBack = await res.json();
@@ -142,4 +139,8 @@ function mostrar(el, textos, tipo) {
     el.style.display = 'block';
 }
 
-carregarUsuario();
+// Chamado pelo lista-usuario.js depois de injetar o fragmento no modal
+function inicializarEdicaoUsuario(id) {
+    idUsuarioEdicao = id;
+    carregarUsuario();
+}

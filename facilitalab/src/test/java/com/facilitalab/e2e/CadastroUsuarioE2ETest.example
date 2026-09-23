@@ -1,0 +1,707 @@
+```java
+package com.facilitalab.e2e;
+
+// WebDriverManager facilita a configuração do ChromeDriver.
+// Ele verifica/gerencia o driver necessário para controlar o Chrome.
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+// Anotações do JUnit 5.
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+// By é usado para dizer ao Selenium COMO localizar um elemento.
+// WebDriver representa o navegador.
+// WebElement representa um elemento HTML encontrado na página.
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+// Duration será usado para definir quanto tempo o Selenium deve esperar.
+import java.time.Duration;
+
+// Classes responsáveis pelas esperas explícitas do Selenium.
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+// Método de asserção do JUnit.
+// Usaremos para verificar se o resultado obtido é o resultado esperado.
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+public class CadastroUsuarioE2ETest {
+
+    /*
+     * O WebDriver é o objeto que representa o navegador controlado
+     * pelo Selenium.
+     *
+     * É através dele que conseguimos:
+     *
+     * - abrir uma URL;
+     * - clicar em elementos;
+     * - preencher campos;
+     * - ler informações da página;
+     * - consultar a URL atual;
+     * - etc.
+     */
+    private WebDriver driver;
+
+
+    /*
+     * @BeforeEach significa:
+     *
+     * "Execute este método antes de CADA teste."
+     *
+     * Neste caso, antes de executar nosso teste E2E,
+     * precisamos abrir um navegador limpo.
+     */
+    @BeforeEach
+    void configurar() {
+
+        /*
+         * Configura o ChromeDriver.
+         *
+         * O ChromeDriver é o componente que permite que o Selenium
+         * controle o navegador Google Chrome.
+         */
+        WebDriverManager.chromedriver().setup();
+
+        /*
+         * Cria uma nova instância do Chrome.
+         *
+         * A partir daqui temos um navegador controlado pelo Selenium.
+         */
+        driver = new org.openqa.selenium.chrome.ChromeDriver();
+    }
+
+
+    /*
+     * @AfterEach significa:
+     *
+     * "Execute este método depois de CADA teste."
+     *
+     * Independentemente de o teste passar ou falhar,
+     * queremos fechar o navegador.
+     */
+    @AfterEach
+    void finalizar() {
+
+        /*
+         * Encerra o navegador controlado pelo Selenium.
+         *
+         * Isso evita deixar uma janela do Chrome aberta
+         * depois que o teste terminar.
+         */
+        driver.quit();
+    }
+
+
+    /*
+     * @Test informa ao JUnit que este método é um teste.
+     *
+     * O nome "deveFazerLogin" poderia ser mais abrangente,
+     * porque atualmente o teste não verifica somente o login.
+     *
+     * Ele também:
+     *
+     * - acessa o dashboard;
+     * - acessa a lista de usuários;
+     * - abre o modal;
+     * - cadastra um usuário;
+     * - verifica o cadastro.
+     *
+     * Mais adiante poderíamos renomeá-lo para algo como:
+     *
+     * deveCadastrarUsuarioComSucesso()
+     */
+    @Test
+    void deveFazerLogin() {
+
+
+        // =========================================================
+        // 1. ACESSANDO A PÁGINA DE LOGIN
+        // =========================================================
+
+        /*
+         * driver.get() manda o navegador acessar uma determinada URL.
+         *
+         * É equivalente a abrir essa URL manualmente no navegador.
+         */
+        driver.get("http://localhost:8081/login");
+
+
+        /*
+         * Criamos um WebDriverWait.
+         *
+         * Ele permite que o Selenium espere determinadas condições
+         * antes de continuar o teste.
+         *
+         * Aqui definimos o tempo máximo de espera como 10 segundos.
+         *
+         * IMPORTANTE:
+         *
+         * Isso não significa que o Selenium sempre ficará 10 segundos
+         * esperando.
+         *
+         * Se o elemento aparecer depois de 1 segundo, ele continua
+         * imediatamente.
+         *
+         * Os 10 segundos são apenas o limite máximo.
+         */
+        WebDriverWait wait = new WebDriverWait(
+                driver,
+                Duration.ofSeconds(10)
+        );
+
+
+        // =========================================================
+        // 2. LOCALIZANDO O CAMPO DE E-MAIL
+        // =========================================================
+
+        /*
+         * wait.until() significa:
+         *
+         * "Espere até que determinada condição seja verdadeira."
+         *
+         * ExpectedConditions.visibilityOfElementLocated()
+         * significa:
+         *
+         * "Espere até que o elemento seja encontrado e esteja visível."
+         *
+         * By.id("email") diz ao Selenium:
+         *
+         * "Procure um elemento HTML cujo id seja 'email'."
+         *
+         * O resultado é armazenado em um WebElement.
+         */
+        WebElement email = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("email")
+                )
+        );
+
+
+        // =========================================================
+        // 3. LOCALIZANDO O CAMPO DE SENHA
+        // =========================================================
+
+        /*
+         * Fazemos exatamente a mesma coisa para o campo de senha.
+         */
+        WebElement senha = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("senha")
+                )
+        );
+
+
+        // =========================================================
+        // 4. PREENCHENDO LOGIN E SENHA
+        // =========================================================
+
+        /*
+         * sendKeys() simula a digitação do usuário.
+         *
+         * Portanto:
+         *
+         * email.sendKeys(...)
+         *
+         * equivale a clicar no campo e digitar o texto.
+         */
+        email.sendKeys("admin@facilitalab.com");
+
+        senha.sendKeys("admin123");
+
+
+        // =========================================================
+        // 5. LOCALIZANDO O BOTÃO DE LOGIN
+        // =========================================================
+
+        /*
+         * Agora esperamos até que o botão:
+         *
+         * 1. exista;
+         * 2. esteja disponível para receber um clique.
+         *
+         * By.id("btnLogin") procura:
+         *
+         * <button id="btnLogin">
+         */
+        WebElement botaoLogin = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.id("btnLogin")
+                )
+        );
+
+
+        // =========================================================
+        // 6. CLICANDO NO BOTÃO DE LOGIN
+        // =========================================================
+
+        /*
+         * click() simula um clique do usuário.
+         *
+         * A partir daqui a aplicação executará seu processo
+         * normal de autenticação.
+         */
+        botaoLogin.click();
+
+
+        // =========================================================
+        // 7. ESPERANDO O REDIRECIONAMENTO PARA O DASHBOARD
+        // =========================================================
+
+        /*
+         * Depois do login, esperamos que a URL mude para /dashboard.
+         *
+         * O Selenium não deve simplesmente assumir que a página
+         * mudou instantaneamente.
+         *
+         * Por isso utilizamos novamente wait.until().
+         */
+        wait.until(
+                ExpectedConditions.urlToBe(
+                        "http://localhost:8081/dashboard"
+                )
+        );
+
+
+        // =========================================================
+        // 8. LOCALIZANDO O LINK DE USUÁRIOS
+        // =========================================================
+
+        /*
+         * Agora estamos no dashboard.
+         *
+         * Precisamos encontrar o link que leva para a lista de usuários.
+         *
+         * Aqui usamos CSS Selector:
+         *
+         * a[href='/lista-usuarios']
+         *
+         * significa:
+         *
+         * "Encontre uma tag <a> cujo atributo href seja
+         * '/lista-usuarios'."
+         */
+        WebElement linkUsuarios = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector(
+                                "a[href='/lista-usuarios']"
+                        )
+                )
+        );
+
+
+        // =========================================================
+        // 9. ACESSANDO A LISTA DE USUÁRIOS
+        // =========================================================
+
+        /*
+         * Clica no link encontrado.
+         */
+        linkUsuarios.click();
+
+
+        /*
+         * Esperamos a aplicação chegar na página de usuários.
+         */
+        wait.until(
+                ExpectedConditions.urlToBe(
+                        "http://localhost:8081/lista-usuarios"
+                )
+        );
+
+
+        /*
+         * assertEquals() é uma verificação do JUnit.
+         *
+         * Estamos dizendo:
+         *
+         * "O valor esperado deve ser igual ao valor encontrado."
+         *
+         * Esperado:
+         * http://localhost:8081/lista-usuarios
+         *
+         * Obtido:
+         * driver.getCurrentUrl()
+         *
+         * Se forem diferentes, o teste falha.
+         */
+        assertEquals(
+                "http://localhost:8081/lista-usuarios",
+                driver.getCurrentUrl()
+        );
+
+
+        // =========================================================
+        // 10. LOCALIZANDO O BOTÃO "CADASTRAR USUÁRIO"
+        // =========================================================
+
+        /*
+         * Agora começa a parte que mudou na nova arquitetura.
+         *
+         * Antes existia um link que levava para:
+         *
+         * /cadastro-usuario
+         *
+         * Agora existe um botão que abre um modal.
+         *
+         * No HTML temos:
+         *
+         * <button class="btn btn-primary btn-novo"
+         *         onclick="abrirModalCadastro()">
+         *
+         * Por isso usamos:
+         *
+         * By.cssSelector("button.btn-novo")
+         *
+         * que significa:
+         *
+         * "Encontre um elemento <button> que possua
+         * a classe btn-novo."
+         */
+        WebElement botaoCadastrar = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("button.btn-novo")
+                )
+        );
+
+
+        /*
+         * Clica no botão.
+         *
+         * Esse clique executa:
+         *
+         * abrirModalCadastro()
+         *
+         * no JavaScript da aplicação.
+         */
+        botaoCadastrar.click();
+
+
+        // =========================================================
+        // 11. ESPERANDO O MODAL APARECER
+        // =========================================================
+
+        /*
+         * O modal já existe no HTML:
+         *
+         * <div id="modalCadastroUsuario" class="modal fade">
+         *
+         * Porém, inicialmente ele está escondido.
+         *
+         * Quando abrimos o modal, o Bootstrap altera seu estado
+         * para torná-lo visível.
+         *
+         * Por isso esperamos especificamente que ele fique visível.
+         */
+        WebElement modalCadastro = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("modalCadastroUsuario")
+                )
+        );
+
+
+        // =========================================================
+        // 12. ESPERANDO O FORMULÁRIO SER CARREGADO
+        // =========================================================
+
+        /*
+         * Aqui existe uma parte importante da arquitetura da aplicação.
+         *
+         * O formulário NÃO está inicialmente dentro do modal.
+         *
+         * O JavaScript faz:
+         *
+         * fetch('/fragments/form-cadastro-usuario.html')
+         *
+         * e depois:
+         *
+         * body.innerHTML = await res.text();
+         *
+         * Portanto, o Selenium precisa esperar o formulário
+         * ser inserido no DOM.
+         *
+         * Estamos procurando o campo:
+         *
+         * <input id="nome">
+         *
+         * dentro do modal.
+         *
+         * visibilityOfNestedElementsLocatedBy() significa:
+         *
+         * "Espere encontrar um elemento dentro deste outro elemento."
+         */
+        wait.until(
+                ExpectedConditions.visibilityOfNestedElementsLocatedBy(
+                        modalCadastro,
+                        By.id("nome")
+                )
+        );
+
+
+        // =========================================================
+        // 13. LOCALIZANDO OS CAMPOS DO FORMULÁRIO
+        // =========================================================
+
+        /*
+         * Agora que sabemos que o formulário foi carregado,
+         * podemos localizar seus campos.
+         *
+         * Cada WebElement representa um elemento HTML
+         * que será manipulado pelo Selenium.
+         */
+
+        WebElement nome = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("nome")
+                )
+        );
+
+
+        WebElement emailCadastro = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("email")
+                )
+        );
+
+
+        WebElement senhaCadastro = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("senha")
+                )
+        );
+
+
+        WebElement cpf = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("cpf")
+                )
+        );
+
+
+        WebElement telefone = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("telefone")
+                )
+        );
+
+
+        // =========================================================
+        // 14. PREENCHENDO OS DADOS
+        // =========================================================
+
+        /*
+         * Preenche o nome.
+         */
+        nome.sendKeys("Usuario Teste E2E");
+
+
+        /*
+         * Criamos um e-mail único para o teste.
+         *
+         * System.currentTimeMillis() retorna o número de
+         * milissegundos desde 01/01/1970.
+         *
+         * Ele não é um número aleatório.
+         *
+         * Como o valor muda conforme o momento da execução,
+         * conseguimos criar um e-mail diferente a cada execução.
+         *
+         * Exemplo:
+         *
+         * e2e.1779273812345@teste.com
+         */
+        String emailTeste =
+                "e2e." + System.currentTimeMillis() + "@teste.com";
+
+
+        /*
+         * Preenche o e-mail gerado.
+         */
+        emailCadastro.sendKeys(emailTeste);
+
+
+        /*
+         * Preenche a senha.
+         */
+        senhaCadastro.sendKeys("Senha@123");
+
+
+        /*
+         * Preenche o CPF.
+         *
+         * Atualmente estamos usando um valor fixo.
+         *
+         * Posteriormente podemos substituir por uma função
+         * que gere CPFs válidos diferentes a cada execução.
+         */
+        cpf.sendKeys("12345677789");
+
+
+        /*
+         * Preenche o telefone.
+         */
+        telefone.sendKeys("71999999999");
+
+
+        // =========================================================
+        // 15. SELECIONANDO O PERFIL
+        // =========================================================
+
+        /*
+         * Localizamos o <select> do perfil.
+         *
+         * No HTML temos:
+         *
+         * <select id="perfil">
+         */
+        WebElement perfil = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.id("perfil")
+                )
+        );
+
+
+        /*
+         * sendKeys("RECEPCAO") faz o Selenium selecionar
+         * a opção correspondente ao valor/texto disponível
+         * no elemento <select>.
+         *
+         * A aplicação receberá:
+         *
+         * perfil = "RECEPCAO"
+         */
+        perfil.sendKeys("RECEPCAO");
+
+
+        // =========================================================
+        // 16. LOCALIZANDO O BOTÃO DE CADASTRO
+        // =========================================================
+
+        /*
+         * Agora localizamos:
+         *
+         * <button id="btnCadastrar">
+         *
+         * Esse botão chama a função JavaScript:
+         *
+         * cadastrar()
+         */
+        WebElement botaoCadastrarUsuario = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.id("btnCadastrar")
+                )
+        );
+
+
+        // =========================================================
+        // 17. ENVIANDO O CADASTRO
+        // =========================================================
+
+        /*
+         * Clicamos no botão.
+         *
+         * A partir daqui o JavaScript da aplicação executará
+         * a função cadastrar().
+         *
+         * Essa função:
+         *
+         * 1. coleta os valores dos campos;
+         * 2. valida os dados;
+         * 3. faz POST /usuarios;
+         * 4. espera a resposta do backend;
+         * 5. se receber 201, fecha o modal;
+         * 6. carrega novamente os usuários.
+         */
+        botaoCadastrarUsuario.click();
+
+
+        // =========================================================
+        // 18. ESPERANDO O MODAL SER FECHADO
+        // =========================================================
+
+        /*
+         * Se o cadastro for realizado com sucesso,
+         * o JavaScript executa:
+         *
+         * bootstrap.Modal.getInstance(
+         *     document.getElementById('modalCadastroUsuario')
+         * ).hide();
+         *
+         * Portanto, esperamos que o modal fique invisível.
+         *
+         * Isso funciona como uma forma indireta de sincronizar
+         * o Selenium com o término da operação de cadastro.
+         */
+        wait.until(
+                ExpectedConditions.invisibilityOfElementLocated(
+                        By.id("modalCadastroUsuario")
+                )
+        );
+
+
+        // =========================================================
+        // 19. ESPERANDO O USUÁRIO APARECER NA TABELA
+        // =========================================================
+
+        /*
+         * Depois de cadastrar, a aplicação executa:
+         *
+         * await carregarUsuarios();
+         *
+         * que faz uma nova requisição:
+         *
+         * GET /usuarios
+         *
+         * Depois disso, renderizar() cria novamente as linhas
+         * da tabela.
+         *
+         * Por isso precisamos esperar o usuário aparecer.
+         *
+         * Estamos procurando uma célula (<td>) dentro do:
+         *
+         * <tbody id="corpo">
+         *
+         * cujo texto seja exatamente:
+         *
+         * "Usuario Teste E2E"
+         */
+        WebElement usuarioCadastrado = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath(
+                                "//tbody[@id='corpo']" +
+                                "//td[normalize-space()='Usuario Teste E2E']"
+                        )
+                )
+        );
+
+
+        // =========================================================
+        // 20. VALIDANDO O RESULTADO FINAL
+        // =========================================================
+
+        /*
+         * Finalmente fazemos uma asserção.
+         *
+         * Queremos garantir que o elemento encontrado
+         * realmente possui o nome esperado.
+         *
+         * Valor esperado:
+         *
+         * "Usuario Teste E2E"
+         *
+         * Valor encontrado:
+         *
+         * usuarioCadastrado.getText()
+         *
+         * Se forem diferentes, o teste falha.
+         */
+        assertEquals(
+                "Usuario Teste E2E",
+                usuarioCadastrado.getText()
+        );
+    }
+}
+```
