@@ -304,6 +304,21 @@ body.playing #splash               { animation: splash-exit            .12s cubi
     box-shadow: 0 0 0 4px rgba(45,106,159,0.12);
 }
 
+/* ─── Feedback de erro nos campos — usa a paleta autoral do sistema ─── */
+.login-field .form-control.is-invalid {
+    border-color: var(--danger);
+}
+
+.login-field .form-control.is-invalid:focus {
+    box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.15);
+}
+
+.login-field .invalid-feedback {
+    color: var(--danger);
+    font-size: .8rem;
+    margin-top: .3rem;
+}
+
 /* ─── Botão temporário — acesso sem autenticação ─── */
 .btn-skip {
     position: fixed;

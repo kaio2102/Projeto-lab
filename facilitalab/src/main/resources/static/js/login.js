@@ -1,27 +1,33 @@
 async function login() {
     const btn = document.getElementById('btnLogin');
+    const emailInput = document.getElementById('email');
+    const senhaInput = document.getElementById('senha');
+    const emailErro = document.getElementById('emailErro');
+    const senhaErro = document.getElementById('senhaErro');
+
+    limparErrosCampos();
 
     const body = {
-        email: document.getElementById('email').value.trim(),
-        senha: document.getElementById('senha').value,
+        email: emailInput.value.trim(),
+        senha: senhaInput.value,
     };
 
-    const erros = [];
+    let temErroCampo = false;
 
     if (!body.email) {
-        erros.push('Informe o e-mail.');
+        marcarInvalido(emailInput, emailErro, 'Informe o e-mail.');
+        temErroCampo = true;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
-        erros.push('Informe um e-mail válido.');
+        marcarInvalido(emailInput, emailErro, 'Informe um e-mail válido.');
+        temErroCampo = true;
     }
 
     if (!body.senha) {
-        erros.push('Informe a senha.');
+        marcarInvalido(senhaInput, senhaErro, 'Informe a senha.');
+        temErroCampo = true;
     }
 
-    if (erros.length > 0) {
-        mostrar(erros);
-        return;
-    }
+    if (temErroCampo) return;
 
     btn.disabled = true;
     btn.textContent = 'Entrando...';
@@ -29,7 +35,7 @@ async function login() {
     try {
         const res = await fetch('/auth/login', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         });
 
@@ -38,11 +44,14 @@ async function login() {
             localStorage.setItem('token', data.token);
             localStorage.setItem('nome', data.nome);
             localStorage.setItem('perfil', data.perfil);
-            localStorage.setItem('id', data.id);   // ID necessário para buscar pedidos do dentista
+            localStorage.setItem('id', data.id);
 
             redirecionarPorPerfil(data.perfil);
 
         } else if (res.status === 401) {
+            // Credencial errada não aponta qual campo está incorreto — marca os dois
+            marcarInvalido(emailInput, emailErro, '');
+            marcarInvalido(senhaInput, senhaErro, '');
             mostrar(['As informações de login que você inseriu estão incorretas.']);
         } else if (res.status === 400) {
             try {
@@ -62,6 +71,19 @@ async function login() {
     }
 }
 
+function marcarInvalido(input, elErro, mensagem) {
+    input.classList.add('is-invalid');
+    elErro.textContent = mensagem;
+}
+
+function limparErrosCampos() {
+    ['email', 'senha'].forEach(id => {
+        const input = document.getElementById(id);
+        input.classList.remove('is-invalid');
+        document.getElementById(id + 'Erro').textContent = '';
+    });
+}
+
 function redirecionarPorPerfil(perfil) {
     const rotas = {
         DENTISTA: '/dashboard-dentista',
@@ -72,7 +94,6 @@ function redirecionarPorPerfil(perfil) {
     window.location.href = rotas[perfil] ?? '/dashboard';
 }
 
-/* A função mostrar() dispara uma instância de Toast do Bootstrap */
 function mostrar(textos) {
     const toastEl = document.getElementById('toastErro');
     const body = document.getElementById('toastErroBody');
@@ -81,7 +102,7 @@ function mostrar(textos) {
         ? textos.map(t => `<p>${t}</p>`).join('')
         : `<p>${textos}</p>`;
 
-    const toast = bootstrap.Toast.getOrCreateInstance(toastEl, {delay: 5000});
+    const toast = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 5000 });
     toast.show();
 }
 
@@ -100,8 +121,16 @@ window.addEventListener('load', () => {
 // Permite submeter com Enter em qualquer campo do formulário
 document.addEventListener('DOMContentLoaded', () => {
     ['email', 'senha'].forEach(id => {
-        document.getElementById(id).addEventListener('keydown', e => {
+        const input = document.getElementById(id);
+
+        input.addEventListener('keydown', e => {
             if (e.key === 'Enter') login();
+        });
+
+        // Limpa o estado de erro do campo assim que o usuário volta a digitar
+        input.addEventListener('input', () => {
+            input.classList.remove('is-invalid');
+            document.getElementById(id + 'Erro').textContent = '';
         });
     });
 });
