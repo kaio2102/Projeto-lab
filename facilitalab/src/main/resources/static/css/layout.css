@@ -356,3 +356,17 @@ nav {
 .toast-erro .toast-body p {
     margin: .2rem 0;
 }
+
+/* Toast de feedback (sucesso) — reutilizável em qualquer página */
+.toast-sucesso {
+    --bs-toast-bg: var(--success-bg);
+    --bs-toast-color: var(--success);
+    --bs-toast-border-color: var(--success-border);
+    border-radius: 10px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.toast-sucesso .toast-body p {
+    margin: .2rem 0;
+}

@@ -37,10 +37,17 @@ td {
     border-bottom: 1px solid var(--border);
 }
 
-tbody tr:last-child td { border-bottom: none; }
+tbody tr:last-child td {
+    border-bottom: none;
+}
 
-tbody tr { transition: background .15s; }
-tbody tr:hover { background: #f0f6ff; }
+tbody tr {
+    transition: background .15s;
+}
+
+tbody tr:hover {
+    background: #f0f6ff;
+}
 
 /* Badge de perfil */
 td:last-child span {
@@ -94,7 +101,7 @@ td:last-child span {
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
-    box-shadow: 0 4px 10px rgba(45,106,159,0.25);
+    box-shadow: 0 4px 10px rgba(45, 106, 159, 0.25);
 }
 
 .btn-deletar {
@@ -107,14 +114,20 @@ td:last-child span {
     background: var(--danger);
     color: #fff;
     border-color: var(--danger);
-    box-shadow: 0 4px 10px rgba(192,57,43,0.25);
+    box-shadow: 0 4px 10px rgba(192, 57, 43, 0.25);
 }
 
 .btn-editar:active,
-.btn-deletar:active { transform: scale(.97); }
+.btn-deletar:active {
+    transform: scale(.97);
+}
 
 .btn-editar:disabled,
-.btn-deletar:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; }
+.btn-deletar:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
 
 /* ── Filtros de perfil ───────────────────────────────────────────────────── */
 
@@ -151,10 +164,12 @@ td:last-child span {
     background: var(--accent);
     color: #ffffff;
     border-color: var(--accent);
-    box-shadow: 0 4px 10px rgba(45,106,159,0.25);
+    box-shadow: 0 4px 10px rgba(45, 106, 159, 0.25);
 }
 
-.filtro-btn:active { transform: scale(.97); }
+.filtro-btn:active {
+    transform: scale(.97);
+}
 
 /* ── Cabeçalho com botão de cadastro ─────────────────────────────────────── */
 

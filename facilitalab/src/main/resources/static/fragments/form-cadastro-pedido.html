@@ -1,0 +1,82 @@
+<div class="cadastro-grid">
+
+    <div class="card">
+        <div class="field">
+            <label for="cor">Cor / Shade <span class="obrigatorio">*</span></label>
+            <input type="text" id="cor" placeholder="Ex: A2, Branco, OM3" maxlength="50"/>
+            <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label for="tipoProtese">Tipo de Prótese <span class="obrigatorio">*</span></label>
+            <select id="tipoProtese">
+                <option value="">Selecione...</option>
+                <option value="COROA">Coroa</option>
+                <option value="PONTE">Ponte</option>
+                <option value="IMPLANTE">Implante</option>
+                <option value="PROVISORIO">Provisório</option>
+                <option value="FACETA">Faceta</option>
+                <option value="INLAY">Inlay</option>
+            </select>
+            <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label for="material">Material <span class="obrigatorio">*</span></label>
+            <select id="material">
+                <option value="">Selecione...</option>
+                <option value="ZIRCONIA">Zircônia</option>
+                <option value="RESINA">Resina</option>
+                <option value="METAL">Metal</option>
+                <option value="CERAMICA">Cerâmica</option>
+            </select>
+            <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label for="prioridade">Prioridade <span class="obrigatorio">*</span></label>
+            <select id="prioridade">
+                <option value="">Selecione...</option>
+                <option value="URGENTE">Urgente</option>
+                <option value="NORMAL">Normal</option>
+            </select>
+            <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label for="prazoEntrega">Prazo de Entrega <span class="obrigatorio">*</span></label>
+            <input type="date" id="prazoEntrega"/>
+            <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" placeholder="Observações adicionais (opcional)"
+                      maxlength="500" rows="4"></textarea>
+            <span class="field-error"></span>
+        </div>
+    </div>
+
+    <div class="side-column">
+        <div class="card">
+            <div class="card__title"><i class="bi bi-paperclip"></i> Arquivo STL</div>
+            <div class="upload-zone" id="stl-upload-zone">
+                <div class="upload-zone__icon"><i class="bi bi-cloud-arrow-up-fill"></i></div>
+                <div class="upload-zone__text">Clique para enviar o STL</div>
+                <div class="upload-zone__sub">Formatos: .stl · .ply · .obj</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card__title"><i class="bi bi-list-check"></i> Checklist</div>
+            <div class="checklist">
+                <label><input type="checkbox" checked/> Scan completo</label>
+                <label><input type="checkbox" checked/> Antagonistas</label>
+                <label><input type="checkbox" checked/> Shade definida</label>
+                <label><input type="checkbox" checked/> Prazo acordado</label>
+            </div>
+        </div>
+
+        <button id="btnEnviar" class="btn btn-primary w-100">Enviar para Triagem</button>
+    </div>
+</div>

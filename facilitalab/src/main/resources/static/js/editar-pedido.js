@@ -1,4 +1,4 @@
-const id = window.location.pathname.split('/').pop();
+let idPedidoEdicao = null;
 
 async function carregarDentistas(dentistaId) {
     const sel = document.getElementById('dentistaId');
@@ -20,16 +20,16 @@ async function carregarDentistas(dentistaId) {
 
 async function carregarPedido() {
     try {
-        const res = await authFetch(`/pedidos/id/${id}`);
+        const res = await authFetch(`/pedidos/id/${idPedidoEdicao}`);
         if (!res.ok) throw new Error();
         const p = await res.json();
 
-        document.getElementById('cor').value          = p.cor ?? '';
-        document.getElementById('tipoProtese').value  = p.tipoProtese ?? '';
-        document.getElementById('material').value     = p.material ?? '';
-        document.getElementById('prioridade').value   = p.prioridade ?? 'NORMAL';
+        document.getElementById('cor').value = p.cor ?? '';
+        document.getElementById('tipoProtese').value = p.tipoProtese ?? '';
+        document.getElementById('material').value = p.material ?? '';
+        document.getElementById('prioridade').value = p.prioridade ?? 'NORMAL';
         document.getElementById('prazoEntrega').value = p.prazoEntrega ?? '';
-        document.getElementById('observacoes').value  = p.observacoes ?? '';
+        document.getElementById('observacoes').value = p.observacoes ?? '';
 
         await carregarDentistas(p.dentistaId);
     } catch {
@@ -42,15 +42,15 @@ async function salvar() {
     const msg = document.getElementById('mensagem');
 
     const body = {
-        cor:          document.getElementById('cor').value.trim(),
-        tipoProtese:  document.getElementById('tipoProtese').value,
-        material:     document.getElementById('material').value,
-        prioridade:   document.getElementById('prioridade').value,
+        cor: document.getElementById('cor').value.trim(),
+        tipoProtese: document.getElementById('tipoProtese').value,
+        material: document.getElementById('material').value,
+        prioridade: document.getElementById('prioridade').value,
         prazoEntrega: document.getElementById('prazoEntrega').value,
-        dentistaId:   document.getElementById('dentistaId').value
+        dentistaId: document.getElementById('dentistaId').value
             ? Number(document.getElementById('dentistaId').value)
             : null,
-        observacoes:  document.getElementById('observacoes').value.trim() || null,
+        observacoes: document.getElementById('observacoes').value.trim() || null,
     };
 
     const erros = [];
@@ -62,10 +62,10 @@ async function salvar() {
     }
 
     if (!body.tipoProtese) erros.push('O tipo de prótese é obrigatório.');
-    if (!body.material)    erros.push('O material é obrigatório.');
-    if (!body.prioridade)  erros.push('A prioridade é obrigatória.');
+    if (!body.material) erros.push('O material é obrigatório.');
+    if (!body.prioridade) erros.push('A prioridade é obrigatória.');
     if (!body.prazoEntrega) erros.push('O prazo de entrega é obrigatório.');
-    if (!body.dentistaId)  erros.push('O dentista é obrigatório.');
+    if (!body.dentistaId) erros.push('O dentista é obrigatório.');
 
     if (erros.length > 0) {
         mostrar(msg, erros, 'erro');
@@ -78,14 +78,15 @@ async function salvar() {
     msg.style.display = 'none';
 
     try {
-        const res = await authFetch(`/pedidos/${id}`, {
+        const res = await authFetch(`/pedidos/${idPedidoEdicao}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body),
         });
 
         if (res.status === 200) {
-            window.location.href = '/lista-pedidos';
+            bootstrap.Modal.getInstance(document.getElementById('modalEditarPedido')).hide();
+            await carregarPedidos();
         } else if (res.status === 400) {
             try {
                 const errosBack = await res.json();
@@ -112,4 +113,9 @@ function mostrar(el, textos, tipo) {
     el.style.display = 'block';
 }
 
-carregarPedido();
+// Chamado pelo lista-pedido.js depois de injetar o fragmento no modal
+function inicializarEdicaoPedido(id) {
+    idPedidoEdicao = id;
+    document.getElementById('btnSalvar').addEventListener('click', salvar);
+    carregarPedido();
+}

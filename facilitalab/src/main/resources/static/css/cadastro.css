@@ -20,7 +20,7 @@
 .field {
     display: flex;
     flex-direction: column;
-    gap: .4rem;
+    gap: .2rem;
 }
 
 label {
@@ -66,4 +66,13 @@ select {
 button {
     width: 100%;
     padding: .85rem;
+}
+
+/* Espaçamento entre campos dentro dos modais de usuário —
+   substitui o gap que vinha de .card, removida no fragmento do modal */
+#modalCadastroUsuarioBody,
+#modalEditarUsuarioBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
 }

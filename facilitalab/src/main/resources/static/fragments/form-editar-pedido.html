@@ -1,0 +1,56 @@
+<div class="field">
+    <label for="cor">Cor</label>
+    <input type="text" id="cor" placeholder="Ex: A2, Branco, OM3" maxlength="50"/>
+</div>
+
+<div class="field">
+    <label for="tipoProtese">Tipo de Prótese</label>
+    <select id="tipoProtese">
+        <option value="">Selecione...</option>
+        <option value="COROA">Coroa</option>
+        <option value="PONTE">Ponte</option>
+        <option value="IMPLANTE">Implante</option>
+        <option value="PROVISORIO">Provisório</option>
+        <option value="FACETA">Faceta</option>
+        <option value="INLAY">Inlay</option>
+    </select>
+</div>
+
+<div class="field">
+    <label for="material">Material</label>
+    <select id="material">
+        <option value="">Selecione...</option>
+        <option value="ZIRCONIA">Zircônia</option>
+        <option value="RESINA">Resina</option>
+        <option value="METAL">Metal</option>
+        <option value="CERAMICA">Cerâmica</option>
+    </select>
+</div>
+
+<div class="field">
+    <label for="prioridade">Prioridade</label>
+    <select id="prioridade">
+        <option value="NORMAL">Normal</option>
+        <option value="URGENTE">Urgente</option>
+    </select>
+</div>
+
+<div class="field">
+    <label for="prazoEntrega">Prazo de Entrega</label>
+    <input type="date" id="prazoEntrega"/>
+</div>
+
+<div class="field">
+    <label for="dentistaId">Dentista</label>
+    <select id="dentistaId">
+        <option value="">Carregando dentistas...</option>
+    </select>
+</div>
+
+<div class="field">
+    <label for="observacoes">Observações</label>
+    <textarea id="observacoes" placeholder="Observações adicionais (opcional)" maxlength="500" rows="4"></textarea>
+</div>
+
+<button id="btnSalvar" class="btn btn-primary w-100">Salvar Alterações</button>
+<div id="mensagem"></div>
