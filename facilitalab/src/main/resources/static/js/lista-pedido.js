@@ -115,8 +115,8 @@ function renderizar(estadoFiltro) {
             <td>${ESTADO_LABEL[p.estado] ?? p.estado}</td>
             <td>${prazo}</td>
             <td class="acoes">
-                <button class="btn-editar" onclick="editar(${p.id})"><i class="bi bi-pencil-fill"></i> Editar</button>
-                <button class="btn-deletar" onclick="deletar(${p.id}, this)"><i class="bi bi-trash-fill"></i> Excluir</button>
+                <button class="btn-editar" onclick="editar(${p.id})">Editar</button>
+                <button class="btn-deletar" onclick="deletar(${p.id}, this)">Excluir</button>
             </td>
         `;
         corpo.appendChild(tr);

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import java.time.Duration;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -143,14 +144,15 @@ public class CadastroUsuarioE2ETest {
 
         telefone.sendKeys("71999999999");
 
-        // Seleciona o perfil
+        // Seleciona o perfil — usa Select em vez de sendKeys,
+        // pois <select> não deve ser preenchido via digitação simulada
         WebElement perfil = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.id("perfil")
                 )
         );
 
-        perfil.sendKeys("RECEPCAO");
+        new Select(perfil).selectByValue("RECEPCAO");
 
         // Clica em cadastrar
         WebElement botaoCadastrarUsuario = wait.until(

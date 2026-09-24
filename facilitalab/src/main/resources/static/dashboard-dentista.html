@@ -19,20 +19,8 @@
 
     <main class="content">
         <div class="page-header">
-            <div class="page-header-row">
-                <div>
-                    <h1>Olá, <span id="nomeUsuario"> </span></h1>
-                    <span class="page-sub">Acompanhe seus pedidos em tempo real</span>
-                </div>
-                <div class="header-actions">
-                        <span class="polling-badge" id="pollingBadge">
-                            <span class="polling-dot"></span> Ao vivo
-                        </span>
-                    <button type="button" class="btn btn-primary btn-novo" onclick="abrirModalCadastroPedido()">
-                        <i class="bi bi-plus-lg"></i> Novo Pedido
-                    </button>
-                </div>
-            </div>
+            <h1>Olá, <span id="nomeUsuario">—</span></h1>
+            <span class="page-sub">Acompanhe seus pedidos</span>
         </div>
 
         <div class="cards-grid" id="statsGrid">
@@ -67,7 +55,7 @@
         </div>
 
         <div class="section-header">
-            <h2 class="section-title">Meus Pedidos Recentes</h2>
+            <h2 class="section-title">Pedidos Recentes</h2>
             <a href="/meus-pedidos" class="link-ver-todos">Ver todos <i class="bi bi-arrow-right"></i></a>
         </div>
 
@@ -93,37 +81,6 @@
     </main>
 </div>
 
-<!-- Toasts de feedback -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080">
-    <div id="toastErroPedido" class="toast toast-erro align-items-center border-0" role="alert" aria-live="assertive"
-         aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body" id="toastErroPedidoBody"></div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
-        </div>
-    </div>
-    <div id="toastSucessoPedido" class="toast toast-sucesso align-items-center border-0" role="alert"
-         aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body" id="toastSucessoPedidoBody"></div>
-            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: Cadastro de pedido -->
-<div class="modal fade" id="modalCadastroPedido" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Novo Pedido</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body" id="modalCadastroPedidoBody"></div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal: Detalhes/edição de pedido -->
 <div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -141,7 +98,6 @@
 <script src="/js/auth.js"></script>
 <script src="/js/sidebar.js"></script>
 <script src="/js/masks.js"></script>
-<script src="/js/cadastro-pedido.js"></script>
 <script src="/js/editar-pedido.js"></script>
 <script src="/js/dashboard-dentista.js"></script>
 </body>

@@ -116,7 +116,7 @@ function renderizarTabela(pedidos) {
             <td><span class="badge ${badgeClasse}">${ESTADO_LABEL[p.estado] ?? p.estado}</span></td>
             <td>${formatarData(p.prazoEntrega)}</td>
             <td class="acoes">
-                <button class="btn-editar" onclick="abrirModalEditarPedido(${p.id})"><i class="bi bi-eye-fill"></i> Ver</button>
+                <button class="btn-editar" onclick="abrirModalEditarPedido(${p.id})">Ver</button>
             </td>
         `;
         corpo.appendChild(tr);
@@ -180,9 +180,6 @@ async function abrirModalEditarPedido(id) {
     bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEditarPedido')).show();
 }
 
-document.getElementById('modalCadastroPedido').addEventListener('hidden.bs.modal', () => {
-    document.getElementById('modalCadastroPedidoBody').innerHTML = '';
-});
 document.getElementById('modalEditarPedido').addEventListener('hidden.bs.modal', () => {
     document.getElementById('modalEditarPedidoBody').innerHTML = '';
 });

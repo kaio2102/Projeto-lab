@@ -8,42 +8,6 @@
     gap: 1rem;
 }
 
-/* ── Badge "Ao vivo" ─────────────────────────────────────────────────────*/
-.polling-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: .45rem;
-    font-size: .78rem;
-    font-weight: 700;
-    color: var(--success);
-    background: var(--success-bg);
-    border: 1.5px solid var(--success-border);
-    padding: .3rem .85rem;
-    border-radius: 99px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-}
-
-.polling-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--success);
-    border-radius: 50%;
-    animation: pulsar 1.4s ease-in-out infinite;
-    flex-shrink: 0;
-}
-
-@keyframes pulsar {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: .45;
-        transform: scale(.75);
-    }
-}
-
 /* ── Stat card — pendente (neutro) ──────────────────────────────────────*/
 .stat-card--pendente .stat-icon { background: var(--neutral-bg); color: var(--neutral); }
 .stat-card--pendente .stat-value { color: var(--neutral); }
@@ -201,6 +165,7 @@
     cursor: pointer;
     outline: none;
     transition: border-color .2s;
+    width: auto;
 }
 
 .select-ordem:focus,

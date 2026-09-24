@@ -181,6 +181,12 @@ nav {
     opacity: 1;
 }
 
+.nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+}
+
 .btn-logout {
     display: flex;
     align-items: center;

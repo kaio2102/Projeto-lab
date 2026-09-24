@@ -39,7 +39,7 @@
 .field {
     display: flex;
     flex-direction: column;
-    gap: .4rem;
+    gap: .2rem;
 }
 
 /* Label padrão de campo */
@@ -261,4 +261,12 @@ textarea {
 #btnEnviar.btn-primary {
     width: 100%;
     padding: .85rem;
+}
+
+/* Espaçamento entre campos do modal de edição de pedido —
+   mesmo padrão aplicado ao modal de usuário (gap ausente por não ter .card) */
+#modalEditarPedidoBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
 }

@@ -11,48 +11,53 @@
         <span class="sidebar-brand-text">Facilita Lab</span>
     </div>
 
-    <span class="nav-section">Menu</span>
     <nav>
         <!-- GESTOR -->
-        <span class="nav-section">Visão Geral</span>
+        <div class="nav-group" data-perfil="GESTOR">
+            <span class="nav-section">Visão Geral</span>
+            <a href="/dashboard" class="nav-item" data-perfil="GESTOR">
+                <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Dashboard
+            </a>
 
-        <a href="/dashboard" class="nav-item" data-perfil="GESTOR">
-            <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Dashboard
-        </a>
+            <span class="nav-section">Cadastros</span>
+            <a href="/lista-usuarios" class="nav-item" data-perfil="GESTOR">
+                <span class="nav-icon"><i class="bi bi-list-ul"></i></span> Usuários
+            </a>
 
-        <span class="nav-section">Cadastros</span>
-
-        <a href="/lista-usuarios" class="nav-item" data-perfil="GESTOR">
-            <span class="nav-icon"><i class="bi bi-list-ul"></i></span> Usuários
-        </a>
-
-        <span class="nav-section">Operação</span>
-
-        <a href="/lista-pedidos" class="nav-item" data-perfil="GESTOR">
-            <span class="nav-icon"><i class="bi bi-grid-3x3-gap-fill"></i></span> Pedidos
-        </a>
+            <span class="nav-section">Operação</span>
+            <a href="/lista-pedidos" class="nav-item" data-perfil="GESTOR">
+                <span class="nav-icon"><i class="bi bi-grid-3x3-gap-fill"></i></span> Pedidos
+            </a>
+        </div>
 
         <!-- DENTISTA -->
-        <a href="/dashboard-dentista" class="nav-item" data-perfil="DENTISTA">
-            <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Meu Dashboard
-        </a>
-        <a href="/meus-pedidos" class="nav-item" data-perfil="DENTISTA">
-            <span class="nav-icon"><i class="bi bi-circle"></i></span> Meus Pedidos
-        </a>
-        <a href="/cadastro-pedido" class="nav-item" data-perfil="DENTISTA">
-            <span class="nav-icon"><i class="bi bi-plus-lg"></i></span> Novo Pedido
-        </a>
+        <div class="nav-group" data-perfil="DENTISTA">
+            <span class="nav-section">Visão Geral</span>
+            <a href="/dashboard-dentista" class="nav-item" data-perfil="DENTISTA">
+                <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Meu Dashboard
+            </a>
+
+            <span class="nav-section">Operação</span>
+            <a href="/meus-pedidos" class="nav-item" data-perfil="DENTISTA">
+                <span class="nav-icon"><i class="bi bi-circle"></i></span> Meus Pedidos
+            </a>
+        </div>
 
         <!-- RECEPCAO -->
-        <a href="/dashboard-recepcao" class="nav-item" data-perfil="RECEPCAO">
-            <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Dashboard
-        </a>
-        <a href="/lista-pedidos-recepcao" class="nav-item" data-perfil="RECEPCAO">
-            <span class="nav-icon"><i class="bi bi-circle"></i></span> Pedidos
-        </a>
-        <a href="/triagem-pedido" class="nav-item" data-perfil="RECEPCAO">
-            <span class="nav-icon"><i class="bi bi-pencil-fill"></i></span> Triagem
-        </a>
+        <div class="nav-group" data-perfil="RECEPCAO">
+            <span class="nav-section">Visão Geral</span>
+            <a href="/dashboard-recepcao" class="nav-item" data-perfil="RECEPCAO">
+                <span class="nav-icon"><i class="bi bi-grid-fill"></i></span> Dashboard
+            </a>
+
+            <span class="nav-section">Operação</span>
+            <a href="/lista-pedidos-recepcao" class="nav-item" data-perfil="RECEPCAO">
+                <span class="nav-icon"><i class="bi bi-circle"></i></span> Pedidos
+            </a>
+            <a href="/triagem-pedido" class="nav-item" data-perfil="RECEPCAO">
+                <span class="nav-icon"><i class="bi bi-pencil-fill"></i></span> Triagem
+            </a>
+        </div>
     </nav>
 
     <div class="sidebar-footer">
